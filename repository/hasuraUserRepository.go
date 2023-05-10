@@ -15,35 +15,29 @@ import (
 type HasuraUserRepository struct {
 }
 
-func (rep HasuraUserRepository) CreateUser(user models.User) models.User {
-	client := &http.Client{
-		Timeout: time.Second * 10,
-	}
+func (rep HasuraUserRepository) CreateUser(user models.User) (models.User, error) {
 	json, err := json.Marshal(user)
-	fmt.Println(string(json))
-	url := goDotEnvVariable("HASURA_URL") + "/user"
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(json))
 	if err != nil {
-		fmt.Println(err)
-		return models.User{}
+		return user, err
 	}
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Add("x-hasura-admin-secret", goDotEnvVariable("HASURA_ADMIN_SECRET"))
-	response, err := client.Do(req)
+	status, err := PostRequest(json, "/user")
 	if err != nil {
-		fmt.Printf("Got error %s", err.Error())
+		return user, err
 	}
-	defer response.Body.Close()
-	return user
+	if status != "200 OK" {
+		return user, fmt.Errorf("Error creating user: %s", status)
+	}
+	fmt.Println(status)
+	return user, nil
 }
-func (rep HasuraUserRepository) GetUser(id int) models.User {
-	return models.User{}
+func (rep HasuraUserRepository) GetUser(id int) (models.User, error) {
+	return models.User{}, nil
 }
-func (rep HasuraUserRepository) GetUsers() []models.User {
-	return []models.User{}
+func (rep HasuraUserRepository) GetUsers() ([]models.User, error) {
+	return []models.User{}, nil
 }
-func (rep HasuraUserRepository) UpdateUser(user models.User) models.User {
-	return user
+func (rep HasuraUserRepository) UpdateUser(user models.User) (models.User, error) {
+	return user, nil
 }
 func (rep HasuraUserRepository) DeleteUser(id int) error {
 	return nil
@@ -57,4 +51,38 @@ func goDotEnvVariable(key string) string {
 	}
 
 	return os.Getenv(key)
+}
+
+func PostRequest(body []byte, route string) (string, error) {
+	start := time.Now()
+	req, err := http.NewRequest("POST", goDotEnvVariable("HASURA_URL")+route, bytes.NewBuffer(body))
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Add("x-hasura-admin-secret", goDotEnvVariable("HASURA_ADMIN_SECRET"))
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	fmt.Println(time.Since(start))
+	return resp.Status, nil
+}
+
+func GetRequest(route string) (string, error) {
+	req, err := http.NewRequest("GET", goDotEnvVariable("HASURA_URL")+route, nil)
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Add("x-hasura-admin-secret", goDotEnvVariable("HASURA_ADMIN_SECRET"))
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	return resp.Status, nil
 }

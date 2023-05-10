@@ -25,6 +25,9 @@ func CreateUser(c *fiber.Ctx) error {
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	conf.Conf{}.GetUserRepository().CreateUser(user)
-	return c.Status(fiber.StatusCreated).JSON(CreateResponseUSer(user))
+	dbuser, err := conf.Conf{}.GetUserRepository().CreateUser(user)
+	if err != nil {
+		return c.Status(fiber.StatusConflict).SendString(err.Error())
+	}
+	return c.Status(fiber.StatusCreated).JSON(CreateResponseUSer(dbuser))
 }

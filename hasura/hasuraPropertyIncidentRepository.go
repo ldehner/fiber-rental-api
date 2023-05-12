@@ -16,7 +16,7 @@ func (HasuraPropertyIncidentRepository) UpdateIncident(incident models.Incident)
 func (HasuraPropertyIncidentRepository) GetIncident(propertyId string, incidentId string) (models.Incident, error) {
 	return models.Incident{}, nil
 }
-func (HasuraPropertyIncidentRepository) DeleteIncident(id string) error {
+func (HasuraPropertyIncidentRepository) DeleteIncident(propertyId string, incidentId string) error {
 	return nil
 }
 func (HasuraPropertyIncidentRepository) GetIncidents(propertyId string) ([]models.Incident, error) {

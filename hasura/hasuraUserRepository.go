@@ -25,7 +25,7 @@ func (HasuraUserRepository) CreateUser(user models.User) (models.User, error) {
 	fmt.Println(status)
 	return user, nil
 }
-func (HasuraUserRepository) GetUser(id int) (models.User, error) {
+func (HasuraUserRepository) GetUser(id string) (models.User, error) {
 	return models.User{}, nil
 }
 func (HasuraUserRepository) GetUsers() ([]models.User, error) {
@@ -37,6 +37,6 @@ func (HasuraUserRepository) UpdateUser(user models.User) (models.User, error) {
 func (HasuraUserRepository) UpdateContactInfo(id string, contactInfo models.ContactInfo) (models.User, error) {
 	return models.User{}, nil
 }
-func (HasuraUserRepository) DeleteUser(id int) error {
+func (HasuraUserRepository) DeleteUser(id string) error {
 	return nil
 }

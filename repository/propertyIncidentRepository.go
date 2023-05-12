@@ -6,6 +6,6 @@ type PropertyIncidentRepository interface {
 	CreateIncident(incident models.Incident) (models.Incident, error)
 	UpdateIncident(incident models.Incident) (models.Incident, error)
 	GetIncident(propertyId string, incidentId string) (models.Incident, error)
-	DeleteIncident(id string) error
+	DeleteIncident(propertyId string, incidentId string) error
 	GetIncidents(propertyId string) ([]models.Incident, error)
 }

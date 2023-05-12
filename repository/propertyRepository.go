@@ -11,5 +11,6 @@ type PropertyRepository interface {
 	UpdatePropertyTenant(id string, tenantId string) (models.Property, error)
 	UpdatePropertyLandlord(id string, landlordId string) (models.Property, error)
 	CreatePropertyInvite(invite models.Invite) (models.Invite, error)
-	GetPropertyInvites(id string) ([]models.Invite, error)
+	GetPropertyInvites(id string) (models.Invite, error)
+	DeletePropertyInvite(id string) error
 }

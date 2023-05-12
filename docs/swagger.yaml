@@ -1,12 +1,170 @@
 basePath: /
 definitions:
-  routes.User:
+  propertyroutes.Incident:
     properties:
-      first:
+      Description:
         type: string
-      id:
+      Id:
         type: string
-      last:
+      Landlord:
+        type: string
+      Property:
+        type: string
+      Status:
+        type: integer
+      Tenant:
+        type: string
+      Type:
+        type: integer
+    type: object
+  propertyroutes.Invite:
+    properties:
+      Id:
+        type: string
+      Landlord:
+        type: string
+      Property:
+        type: string
+      Tenant:
+        type: string
+      ValidDue:
+        type: string
+    type: object
+  propertyroutes.MarketProfile:
+    properties:
+      AvailabilityDate:
+        type: string
+      Deposit:
+        type: number
+      Description:
+        type: string
+      HeatPrice:
+        type: number
+      Id:
+        type: string
+      MinimumIncome:
+        type: number
+      MinimumPeriod:
+        type: integer
+      Period:
+        type: integer
+      PowerPrice:
+        type: number
+      Rent:
+        type: number
+    type: object
+  propertyroutes.Property:
+    properties:
+      Apartment:
+        type: string
+      Balcony:
+        type: boolean
+      City:
+        type: string
+      Country:
+        type: string
+      Garage:
+        type: boolean
+      Garden:
+        type: boolean
+      HeatType:
+        type: integer
+      Housenumber:
+        type: string
+      Id:
+        type: string
+      Landlord:
+        type: string
+      Rooms:
+        type: integer
+      Size:
+        type: integer
+      Status:
+        type: integer
+      Street:
+        type: string
+      Tenant:
+        type: string
+      Type:
+        type: integer
+    type: object
+  propertyroutes.RentProfile:
+    properties:
+      ContractDue:
+        type: string
+      Deposit:
+        type: number
+      HeatCosts:
+        type: number
+      Id:
+        type: string
+      Minimum:
+        type: integer
+      Rent:
+        type: number
+      RentalStart:
+        type: string
+    type: object
+  userroutes.ContactInfo:
+    properties:
+      Mail:
+        type: string
+      Phone:
+        type: string
+    type: object
+  userroutes.SearchProfile:
+    properties:
+      Budget:
+        type: number
+      City:
+        type: string
+      Country:
+        type: string
+      Radius:
+        type: number
+      Rooms:
+        type: integer
+      Size:
+        type: integer
+      Street:
+        type: string
+      Type:
+        type: integer
+      Zipcode:
+        type: string
+    type: object
+  userroutes.TenantInfo:
+    properties:
+      CriminalRecord:
+        type: boolean
+      Id:
+        type: string
+      Income:
+        type: number
+      IncomeProof:
+        type: boolean
+    type: object
+  userroutes.User:
+    properties:
+      Apartment:
+        type: string
+      City:
+        type: string
+      Country:
+        type: string
+      First:
+        type: string
+      Housenumber:
+        type: string
+      Id:
+        type: string
+      Last:
+        type: string
+      Mail:
+        type: string
+      Phone:
+        type: string
+      Street:
         type: string
     type: object
 host: localhost:3000
@@ -39,7 +197,598 @@ paths:
       summary: Show the status of server.
       tags:
       - root
+  /incident/{propertyId}:
+    get:
+      consumes:
+      - application/json
+      description: Get all incidents
+      parameters:
+      - description: Property ID
+        in: path
+        name: propertyId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            items:
+              $ref: '#/definitions/propertyroutes.Incident'
+            type: array
+      summary: Get all incidents
+      tags:
+      - incidents
+  /incident/{propertyId}/{incidentId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an incident
+      parameters:
+      - description: Incident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Delete an incident
+      tags:
+      - incidents
+    get:
+      consumes:
+      - application/json
+      description: Get an incident
+      parameters:
+      - description: Incident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/propertyroutes.Incident'
+      summary: Get an incident
+      tags:
+      - incidents
+    patch:
+      consumes:
+      - application/json
+      description: Update an incident
+      parameters:
+      - description: Incident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Incident
+        in: body
+        name: incident
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.Incident'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Update an incident
+      tags:
+      - incidents
+  /incidents/{propertyId}:
+    post:
+      consumes:
+      - application/json
+      description: Create a new incident
+      parameters:
+      - description: Incident
+        in: body
+        name: incident
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.Incident'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Create a new incident
+      tags:
+      - incidents
+  /property:
+    get:
+      consumes:
+      - application/json
+      description: Get all properties
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/propertyroutes.Property'
+            type: array
+      summary: Get all properties
+      tags:
+      - Property
+    post:
+      consumes:
+      - application/json
+      description: Create a new property
+      parameters:
+      - description: Property
+        in: body
+        name: property
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.Property'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.Property'
+      summary: Create a new property
+      tags:
+      - Property
+  /property/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a property
+      parameters:
+      - description: Property ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a property
+      tags:
+      - Property
+    get:
+      consumes:
+      - application/json
+      description: Get a property
+      parameters:
+      - description: Property ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.Property'
+      summary: Get a property
+      tags:
+      - Property
+    patch:
+      consumes:
+      - application/json
+      description: Update a property
+      parameters:
+      - description: Property ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Property
+        in: body
+        name: property
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.Property'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.Property'
+      summary: Update a property
+      tags:
+      - Property
+  /property/invite/{id}/{userId}:
+    post:
+      consumes:
+      - application/json
+      description: Accept an invite
+      parameters:
+      - description: Invite ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.Invite'
+      summary: Accept an invite
+      tags:
+      - Property
+  /property/invite/{propertyId}:
+    get:
+      consumes:
+      - application/json
+      description: Create an invite
+      parameters:
+      - description: Invite
+        in: body
+        name: invite
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.Invite'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.Invite'
+      summary: Create an invite
+      tags:
+      - Property
+  /property/landlord/{id}/{landlordId}:
+    patch:
+      consumes:
+      - application/json
+      description: Update a property landlord
+      parameters:
+      - description: Property ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Landlord ID
+        in: path
+        name: landlordId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Update a property landlord
+      tags:
+      - Property
+  /property/marketprofile/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a market profile
+      parameters:
+      - description: Market Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a market profile
+      tags:
+      - MarketProfile
+    get:
+      consumes:
+      - application/json
+      description: Get a market profile
+      parameters:
+      - description: Market Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/propertyroutes.MarketProfile'
+      summary: Get a market profile
+      tags:
+      - MarketProfile
+    post:
+      consumes:
+      - application/json
+      description: Create a new market profile
+      parameters:
+      - description: Market Profile
+        in: body
+        name: marketProfile
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.MarketProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.MarketProfile'
+      summary: Create a new market profile
+      tags:
+      - MarketProfile
+    put:
+      consumes:
+      - application/json
+      description: Update a market profile
+      parameters:
+      - description: Market Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Market Profile
+        in: body
+        name: marketProfile
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.MarketProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.MarketProfile'
+      summary: Update a market profile
+      tags:
+      - MarketProfile
+  /property/marketprofiles:
+    get:
+      consumes:
+      - application/json
+      description: Get all market profiles
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            items:
+              $ref: '#/definitions/propertyroutes.MarketProfile'
+            type: array
+      summary: Get all market profiles
+      tags:
+      - MarketProfile
+  /property/rentprofile/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a rent profile
+      operationId: delete-rent-profile
+      parameters:
+      - description: Rent Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a rent profile
+    get:
+      consumes:
+      - application/json
+      description: Get a rent profile
+      operationId: get-rent-profile
+      parameters:
+      - description: Rent Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/propertyroutes.RentProfile'
+      summary: Get a rent profile
+    patch:
+      consumes:
+      - application/json
+      description: Update a rent profile
+      operationId: update-rent-profile
+      parameters:
+      - description: Rent Profile ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Rent Profile
+        in: body
+        name: rentProfile
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.RentProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.RentProfile'
+      summary: Update a rent profile
+    post:
+      consumes:
+      - application/json
+      description: Create a rent profile
+      operationId: create-rent-profile
+      parameters:
+      - description: Rent Profile
+        in: body
+        name: rentProfile
+        required: true
+        schema:
+          $ref: '#/definitions/propertyroutes.RentProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/propertyroutes.RentProfile'
+      summary: Create a rent profile
+  /property/tenant/{id}/{tenantId}:
+    patch:
+      consumes:
+      - application/json
+      description: Update a property tenant
+      parameters:
+      - description: Property ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Tenant ID
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Update a property tenant
+      tags:
+      - Property
   /user:
+    get:
+      consumes:
+      - application/json
+      description: Get all users
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            items:
+              $ref: '#/definitions/userroutes.User'
+            type: array
+      summary: Get all users
+      tags:
+      - user
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a user
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Get a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/userroutes.User'
+      summary: Get a user
+      tags:
+      - user
+  /user/contactinfo/{id}:
+    patch:
+      consumes:
+      - application/json
+      description: Update a user's contact info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Contact Info
+        in: body
+        name: contactInfo
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.ContactInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userroutes.User'
+      summary: Update a user's contact info
+      tags:
+      - user
+  /user/create:
     post:
       consumes:
       - application/json
@@ -50,15 +799,219 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/routes.User'
+          $ref: '#/definitions/userroutes.User'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/routes.User'
+            $ref: '#/definitions/userroutes.User'
       summary: Create a new user
+      tags:
+      - user
+  /user/searchprofile/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a user's search profile
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a user's search profile
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Get a user's search profile
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/userroutes.SearchProfile'
+      summary: Get a user's search profile
+      tags:
+      - user
+    patch:
+      consumes:
+      - application/json
+      description: Update a user's search profile
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Search Profile
+        in: body
+        name: searchProfile
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.SearchProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userroutes.SearchProfile'
+      summary: Update a user's search profile
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: Create a user's search profile
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Search Profile
+        in: body
+        name: searchProfile
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.SearchProfile'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/userroutes.SearchProfile'
+      summary: Create a user's search profile
+      tags:
+      - user
+  /user/tenantinfo/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a user's tenant info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete a user's tenant info
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: Get a user's tenant info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/userroutes.TenantInfo'
+      summary: Get a user's tenant info
+      tags:
+      - user
+    patch:
+      consumes:
+      - application/json
+      description: Update a user's tenant info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Tenant Info
+        in: body
+        name: tenantInfo
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.TenantInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userroutes.TenantInfo'
+      summary: Update a user's tenant info
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      description: Create a user's tenant info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Tenant Info
+        in: body
+        name: tenantInfo
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.TenantInfo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/userroutes.TenantInfo'
+      summary: Create a user's tenant info
+      tags:
+      - user
+  /user/update:
+    patch:
+      consumes:
+      - application/json
+      description: Update a user
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/userroutes.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/userroutes.User'
+      summary: Update a user
       tags:
       - user
 schemes:

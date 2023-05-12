@@ -49,7 +49,841 @@ const docTemplate = `{
                 }
             }
         },
+        "/incident/{propertyId}": {
+            "get": {
+                "description": "Get all incidents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Get all incidents",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "propertyId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/propertyroutes.Incident"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/incident/{propertyId}/{incidentId}": {
+            "get": {
+                "description": "Get an incident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Get an incident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Incident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Incident"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an incident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Delete an incident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Incident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update an incident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Update an incident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Incident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Incident",
+                        "name": "incident",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Incident"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/incidents/{propertyId}": {
+            "post": {
+                "description": "Create a new incident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Create a new incident",
+                "parameters": [
+                    {
+                        "description": "Incident",
+                        "name": "incident",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Incident"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/property": {
+            "get": {
+                "description": "Get all properties",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Get all properties",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/propertyroutes.Property"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new property",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Create a new property",
+                "parameters": [
+                    {
+                        "description": "Property",
+                        "name": "property",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Property"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Property"
+                        }
+                    }
+                }
+            }
+        },
+        "/property/invite/{id}/{userId}": {
+            "post": {
+                "description": "Accept an invite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Accept an invite",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Invite ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Invite"
+                        }
+                    }
+                }
+            }
+        },
+        "/property/invite/{propertyId}": {
+            "get": {
+                "description": "Create an invite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Create an invite",
+                "parameters": [
+                    {
+                        "description": "Invite",
+                        "name": "invite",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Invite"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Invite"
+                        }
+                    }
+                }
+            }
+        },
+        "/property/landlord/{id}/{landlordId}": {
+            "patch": {
+                "description": "Update a property landlord",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Update a property landlord",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Landlord ID",
+                        "name": "landlordId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/property/marketprofile/{id}": {
+            "get": {
+                "description": "Get a market profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MarketProfile"
+                ],
+                "summary": "Get a market profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Market Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a market profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MarketProfile"
+                ],
+                "summary": "Update a market profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Market Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Market Profile",
+                        "name": "marketProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new market profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MarketProfile"
+                ],
+                "summary": "Create a new market profile",
+                "parameters": [
+                    {
+                        "description": "Market Profile",
+                        "name": "marketProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a market profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MarketProfile"
+                ],
+                "summary": "Delete a market profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Market Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/property/marketprofiles": {
+            "get": {
+                "description": "Get all market profiles",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MarketProfile"
+                ],
+                "summary": "Get all market profiles",
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/property/rentprofile/{id}": {
+            "get": {
+                "description": "Get a rent profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get a rent profile",
+                "operationId": "get-rent-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rent Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a rent profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create a rent profile",
+                "operationId": "create-rent-profile",
+                "parameters": [
+                    {
+                        "description": "Rent Profile",
+                        "name": "rentProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a rent profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Delete a rent profile",
+                "operationId": "delete-rent-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rent Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update a rent profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Update a rent profile",
+                "operationId": "update-rent-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rent Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Rent Profile",
+                        "name": "rentProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                        }
+                    }
+                }
+            }
+        },
+        "/property/tenant/{id}/{tenantId}": {
+            "patch": {
+                "description": "Update a property tenant",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Update a property tenant",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Tenant ID",
+                        "name": "tenantId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/property/{id}": {
+            "get": {
+                "description": "Get a property",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Get a property",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Property"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a property",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Delete a property",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update a property",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Update a property",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Property",
+                        "name": "property",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Property"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/propertyroutes.Property"
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
+            "get": {
+                "description": "Get all users",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get all users",
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/userroutes.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/contactinfo/{id}": {
+            "patch": {
+                "description": "Update a user's contact info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user's contact info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Contact Info",
+                        "name": "contactInfo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.ContactInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/create": {
             "post": {
                 "description": "Create a new user",
                 "consumes": [
@@ -69,7 +903,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/routes.User"
+                            "$ref": "#/definitions/userroutes.User"
                         }
                     }
                 ],
@@ -77,24 +911,632 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/routes.User"
+                            "$ref": "#/definitions/userroutes.User"
                         }
+                    }
+                }
+            }
+        },
+        "/user/searchprofile/{id}": {
+            "get": {
+                "description": "Get a user's search profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a user's search profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.SearchProfile"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a user's search profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create a user's search profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Search Profile",
+                        "name": "searchProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.SearchProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.SearchProfile"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a user's search profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete a user's search profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update a user's search profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user's search profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Search Profile",
+                        "name": "searchProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.SearchProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.SearchProfile"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/tenantinfo/{id}": {
+            "get": {
+                "description": "Get a user's tenant info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a user's tenant info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.TenantInfo"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a user's tenant info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create a user's tenant info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Tenant Info",
+                        "name": "tenantInfo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.TenantInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.TenantInfo"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a user's tenant info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete a user's tenant info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update a user's tenant info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user's tenant info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Tenant Info",
+                        "name": "tenantInfo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.TenantInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.TenantInfo"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "patch": {
+                "description": "Update a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user",
+                "parameters": [
+                    {
+                        "description": "User",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "description": "Get a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/userroutes.User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete a user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "routes.User": {
+        "propertyroutes.Incident": {
             "type": "object",
             "properties": {
-                "first": {
+                "Description": {
                     "type": "string"
                 },
-                "id": {
+                "Id": {
                     "type": "string"
                 },
-                "last": {
+                "Landlord": {
+                    "type": "string"
+                },
+                "Property": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "Tenant": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "propertyroutes.Invite": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "Landlord": {
+                    "type": "string"
+                },
+                "Property": {
+                    "type": "string"
+                },
+                "Tenant": {
+                    "type": "string"
+                },
+                "ValidDue": {
+                    "type": "string"
+                }
+            }
+        },
+        "propertyroutes.MarketProfile": {
+            "type": "object",
+            "properties": {
+                "AvailabilityDate": {
+                    "type": "string"
+                },
+                "Deposit": {
+                    "type": "number"
+                },
+                "Description": {
+                    "type": "string"
+                },
+                "HeatPrice": {
+                    "type": "number"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "MinimumIncome": {
+                    "type": "number"
+                },
+                "MinimumPeriod": {
+                    "type": "integer"
+                },
+                "Period": {
+                    "type": "integer"
+                },
+                "PowerPrice": {
+                    "type": "number"
+                },
+                "Rent": {
+                    "type": "number"
+                }
+            }
+        },
+        "propertyroutes.Property": {
+            "type": "object",
+            "properties": {
+                "Apartment": {
+                    "type": "string"
+                },
+                "Balcony": {
+                    "type": "boolean"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "Garage": {
+                    "type": "boolean"
+                },
+                "Garden": {
+                    "type": "boolean"
+                },
+                "HeatType": {
+                    "type": "integer"
+                },
+                "Housenumber": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Landlord": {
+                    "type": "string"
+                },
+                "Rooms": {
+                    "type": "integer"
+                },
+                "Size": {
+                    "type": "integer"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "Street": {
+                    "type": "string"
+                },
+                "Tenant": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "propertyroutes.RentProfile": {
+            "type": "object",
+            "properties": {
+                "ContractDue": {
+                    "type": "string"
+                },
+                "Deposit": {
+                    "type": "number"
+                },
+                "HeatCosts": {
+                    "type": "number"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Minimum": {
+                    "type": "integer"
+                },
+                "Rent": {
+                    "type": "number"
+                },
+                "RentalStart": {
+                    "type": "string"
+                }
+            }
+        },
+        "userroutes.ContactInfo": {
+            "type": "object",
+            "properties": {
+                "Mail": {
+                    "type": "string"
+                },
+                "Phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "userroutes.SearchProfile": {
+            "type": "object",
+            "properties": {
+                "Budget": {
+                    "type": "number"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "Radius": {
+                    "type": "number"
+                },
+                "Rooms": {
+                    "type": "integer"
+                },
+                "Size": {
+                    "type": "integer"
+                },
+                "Street": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                },
+                "Zipcode": {
+                    "type": "string"
+                }
+            }
+        },
+        "userroutes.TenantInfo": {
+            "type": "object",
+            "properties": {
+                "CriminalRecord": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Income": {
+                    "type": "number"
+                },
+                "IncomeProof": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "userroutes.User": {
+            "type": "object",
+            "properties": {
+                "Apartment": {
+                    "type": "string"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "First": {
+                    "type": "string"
+                },
+                "Housenumber": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Last": {
+                    "type": "string"
+                },
+                "Mail": {
+                    "type": "string"
+                },
+                "Phone": {
+                    "type": "string"
+                },
+                "Street": {
                     "type": "string"
                 }
             }

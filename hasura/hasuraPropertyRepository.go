@@ -31,6 +31,10 @@ func (HasuraPropertyRepository) UpdatePropertyLandlord(id string, landlordId str
 func (HasuraPropertyRepository) CreatePropertyInvite(invite models.Invite) (models.Invite, error) {
 	return models.Invite{}, nil
 }
-func (HasuraPropertyRepository) GetPropertyInvites(id string) ([]models.Invite, error) {
-	return []models.Invite{}, nil
+func (HasuraPropertyRepository) GetPropertyInvites(id string) (models.Invite, error) {
+	return models.Invite{}, nil
+}
+
+func (HasuraPropertyRepository) DeletePropertyInvite(id string) error {
+	return nil
 }

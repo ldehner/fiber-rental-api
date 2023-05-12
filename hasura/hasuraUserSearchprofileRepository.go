@@ -1,4 +1,4 @@
-package repository
+package hasura
 
 import (
 	"github.com/ldehner/fiber-rental-api/models"

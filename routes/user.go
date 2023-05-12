@@ -14,12 +14,21 @@ type User struct {
 
 func CreateResponseUSer(userModel models.User) User {
 	return User{
-		ID:        userModel.ID,
+		ID:        userModel.Id,
 		FirstName: userModel.FirstName,
 		LastName:  userModel.LastName,
 	}
 }
 
+// CreateUser godoc
+// @Summary Create a new user
+// @Description Create a new user
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param user body User true "User"
+// @Success 201 {object} User
+// @Router /user/create [post]
 func CreateUser(c *fiber.Ctx) error {
 	var user models.User
 	if err := c.BodyParser(&user); err != nil {

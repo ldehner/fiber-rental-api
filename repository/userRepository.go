@@ -8,4 +8,5 @@ type UserRepository interface {
 	GetUsers() ([]models.User, error)
 	UpdateUser(user models.User) (models.User, error)
 	DeleteUser(id int) error
+	UpdateContactInfo(id string, contactInfo models.ContactInfo) (models.User, error)
 }

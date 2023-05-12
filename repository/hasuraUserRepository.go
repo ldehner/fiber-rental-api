@@ -39,6 +39,9 @@ func (rep HasuraUserRepository) GetUsers() ([]models.User, error) {
 func (rep HasuraUserRepository) UpdateUser(user models.User) (models.User, error) {
 	return user, nil
 }
+func (rep HasuraUserRepository) UpdateContactInfo(id string, contactInfo models.ContactInfo) (models.User, error) {
+	return models.User{}, nil
+}
 func (rep HasuraUserRepository) DeleteUser(id int) error {
 	return nil
 }

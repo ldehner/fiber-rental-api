@@ -1,7 +1,6 @@
 package requestmodels
 
 type SearchProfile struct {
-	UserId  string  `json:"UserId"`
 	Budget  float32 `json:"Budget"`
 	City    string  `json:"City"`
 	Country string  `json:"Country"`

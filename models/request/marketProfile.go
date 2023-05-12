@@ -6,7 +6,6 @@ type MarketProfile struct {
 	Period           uint8   `json:"Period"`
 	MinimumPeriod    uint8   `json:"MinimumPeriod"`
 	MinimumIncome    float32 `json:"MinimumIncome"`
-	Id               string  `json:"Id"`
 	HeatPrice        float32 `json:"HeatPrice"`
 	Description      string  `json:"Description"`
 	AvailabilityDate string  `json:"AvailabilityDate"`

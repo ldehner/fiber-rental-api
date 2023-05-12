@@ -9,7 +9,6 @@ type Property struct {
 	Garden      bool   `json:"Garden"`
 	HeatType    uint8  `json:"HeatType"`
 	Housenumber string `json:"Housenumber"`
-	Id          string `json:"Id"`
 	LandlordId  string `json:"Landlord"`
 	Rooms       uint8  `json:"Rooms"`
 	Size        uint16 `json:"Size"`

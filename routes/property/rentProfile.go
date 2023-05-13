@@ -3,18 +3,8 @@ package propertyroutes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
 )
-
-type RentProfile struct {
-	ContractDue string  `json:"ContractDue"`
-	HeatCosts   float32 `json:"HeatCosts"`
-	Deposit     float32 `json:"Deposit"`
-	Id          string  `json:"Id"`
-	Minimum     uint8   `json:"Minimum"`
-	Rent        float32 `json:"Rent"`
-	RentalStart string  `json:"RentalStart"`
-}
 
 // CreateRentProfile godoc
 // @Summary Create a rent profile
@@ -26,11 +16,12 @@ type RentProfile struct {
 // @Success 200 {object} RentProfile
 // @Router /property/rentprofile/{id} [post]
 func CreateRentProfile(c *fiber.Ctx) error {
-	var rentProfile models.RentProfile
+	id := c.Params("id")
+	var rentProfile requestmodels.RentProfile
 	if err := c.BodyParser(&rentProfile); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	dbrentProfile, err := conf.Conf{}.GetPropertyRentProfileRepository().CreateRentProfile(rentProfile)
+	dbrentProfile, err := conf.Conf{}.GetPropertyRentProfileRepository().CreateRentProfile(CreateStoreRentProfile(rentProfile, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -67,12 +58,11 @@ func GetRentProfile(c *fiber.Ctx) error {
 // @Router /property/rentprofile/{id} [patch]
 func UpdateRentProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var rentProfile models.RentProfile
+	var rentProfile requestmodels.RentProfile
 	if err := c.BodyParser(&rentProfile); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	rentProfile.Id = id
-	dbrentProfile, err := conf.Conf{}.GetPropertyRentProfileRepository().UpdateRentProfile(rentProfile)
+	dbrentProfile, err := conf.Conf{}.GetPropertyRentProfileRepository().UpdateRentProfile(CreateStoreRentProfile(rentProfile, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}

@@ -4,18 +4,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
+	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 )
-
-type Incident struct {
-	Description string `json:"Description"`
-	Id          string `json:"Id"`
-	Type        uint8  `json:"Type"`
-	TenantId    string `json:"Tenant"`
-	Status      int8   `json:"Status"`
-	PropertyId  string `json:"Property"`
-	LandlordId  string `json:"Landlord"`
-}
 
 // CreateIncident godoc
 // @Summary Create a new incident
@@ -28,13 +19,12 @@ type Incident struct {
 // @Failure 400 {string} string "Bad Request"
 // @Router /incidents/{propertyId} [post]
 func CreateIncident(c *fiber.Ctx) error {
-	var incident models.Incident
+	var incident requestmodels.Incident
 	if err := c.BodyParser(&incident); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	incident.PropertyId = c.Params("propertyId")
-	incident.Id = uuid.New().String()
-	dbincident, err := conf.Conf{}.GetPropertyIncidentRepository().CreateIncident(incident)
+	propertyId := c.Params("propertyId")
+	dbincident, err := conf.Conf{}.GetPropertyIncidentRepository().CreateIncident(CreateStoreIncident(incident, uuid.New().String(), propertyId))
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
@@ -75,7 +65,7 @@ func GetIncidents(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	var responseIncidents []Incident
+	var responseIncidents []responsemodels.Incident
 	for _, incident := range incidents {
 		responseIncidents = append(responseIncidents, CreateResponseIncident(incident))
 	}
@@ -96,13 +86,11 @@ func GetIncidents(c *fiber.Ctx) error {
 func UpdateIncident(c *fiber.Ctx) error {
 	propertyId := c.Params("propertyId")
 	incidentId := c.Params("incidentId")
-	var incident models.Incident
+	var incident requestmodels.Incident
 	if err := c.BodyParser(&incident); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	incident.Id = incidentId
-	incident.PropertyId = propertyId
-	dbincident, err := conf.Conf{}.GetPropertyIncidentRepository().UpdateIncident(incident)
+	dbincident, err := conf.Conf{}.GetPropertyIncidentRepository().UpdateIncident(CreateStoreIncident(incident, incidentId, propertyId))
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}

@@ -1,11 +1,11 @@
 package repository
 
-import "github.com/ldehner/fiber-rental-api/models"
+import storemodels "github.com/ldehner/fiber-rental-api/models/store"
 
 type PropertyMarketProfileRepository interface {
-	CreateMarketProfile(marketprofile models.MarketProfile) (models.MarketProfile, error)
-	UpdateMarketProfile(marketprofile models.MarketProfile) (models.MarketProfile, error)
-	GetMarketProfile(id string) (models.MarketProfile, error)
+	CreateMarketProfile(marketprofile storemodels.MarketProfile) (storemodels.MarketProfile, error)
+	UpdateMarketProfile(marketprofile storemodels.MarketProfile) (storemodels.MarketProfile, error)
+	GetMarketProfile(id string) (storemodels.MarketProfile, error)
 	DeleteMarketProfile(id string) error
-	GetMarketProfiles() ([]models.MarketProfile, error)
+	GetMarketProfiles() ([]storemodels.MarketProfile, error)
 }

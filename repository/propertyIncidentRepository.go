@@ -1,11 +1,11 @@
 package repository
 
-import "github.com/ldehner/fiber-rental-api/models"
+import storemodels "github.com/ldehner/fiber-rental-api/models/store"
 
 type PropertyIncidentRepository interface {
-	CreateIncident(incident models.Incident) (models.Incident, error)
-	UpdateIncident(incident models.Incident) (models.Incident, error)
-	GetIncident(propertyId string, incidentId string) (models.Incident, error)
+	CreateIncident(incident storemodels.Incident) (storemodels.Incident, error)
+	UpdateIncident(incident storemodels.Incident) (storemodels.Incident, error)
+	GetIncident(propertyId string, incidentId string) (storemodels.Incident, error)
 	DeleteIncident(propertyId string, incidentId string) error
-	GetIncidents(propertyId string) ([]models.Incident, error)
+	GetIncidents(propertyId string) ([]storemodels.Incident, error)
 }

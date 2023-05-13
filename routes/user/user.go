@@ -3,26 +3,9 @@ package userroutes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
+	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 )
-
-type ContactInfo struct {
-	Phone string `json:"Phone"`
-	Mail  string `json:"Mail"`
-}
-
-type User struct {
-	Id          string `json:"Id"`
-	FirstName   string `json:"First"`
-	LastName    string `json:"Last"`
-	Phone       string `json:"Phone"`
-	Mail        string `json:"Mail"`
-	Country     string `json:"Country"`
-	City        string `json:"City"`
-	Street      string `json:"Street"`
-	Housenumber string `json:"Housenumber"`
-	Apartment   string `json:"Apartment"`
-}
 
 // CreateUser godoc
 // @Summary Create a new user
@@ -34,11 +17,11 @@ type User struct {
 // @Success 201 {object} User
 // @Router /user/create [post]
 func CreateUser(c *fiber.Ctx) error {
-	var user models.User
+	var user requestmodels.User
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	dbuser, err := conf.Conf{}.GetUserRepository().CreateUser(user)
+	dbuser, err := conf.Conf{}.GetUserRepository().CreateUser(CreateStoreUser(user))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -76,7 +59,7 @@ func GetUsers(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	var responseUsers []User
+	var responseUsers []responsemodels.User
 	for _, user := range users {
 		responseUsers = append(responseUsers, CreateResponseUser(user))
 	}
@@ -93,11 +76,11 @@ func GetUsers(c *fiber.Ctx) error {
 // @Success 200 {object} User
 // @Router /user/update [patch]
 func UpdateUser(c *fiber.Ctx) error {
-	var user models.User
+	var user requestmodels.User
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	dbuser, err := conf.Conf{}.GetUserRepository().UpdateUser(user)
+	dbuser, err := conf.Conf{}.GetUserRepository().UpdateUser(CreateStoreUser(user))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -116,11 +99,11 @@ func UpdateUser(c *fiber.Ctx) error {
 // @Router /user/contactinfo/{id} [patch]
 func UpdateContactInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var contactInfo models.ContactInfo
+	var contactInfo requestmodels.ContactInfo
 	if err := c.BodyParser(&contactInfo); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	dbuser, err := conf.Conf{}.GetUserRepository().UpdateContactInfo(id, contactInfo)
+	dbuser, err := conf.Conf{}.GetUserRepository().UpdateContactInfo(CreateStoreContactInfo(contactInfo, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}

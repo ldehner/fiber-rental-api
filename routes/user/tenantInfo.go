@@ -3,15 +3,8 @@ package userroutes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
 )
-
-type TenantInfo struct {
-	Id             string  `json:"Id"`
-	CriminalRecord bool    `json:"CriminalRecord"`
-	Income         float32 `json:"Income"`
-	IncomeProof    bool    `json:"IncomeProof"`
-}
 
 // GetTenantInfo godoc
 // @Summary Get a user's tenant info
@@ -43,12 +36,11 @@ func GetTenantInfo(c *fiber.Ctx) error {
 // @Router /user/tenantinfo/{id} [patch]
 func UpdateTenantInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var tenantInfo models.TenantInfo
+	var tenantInfo requestmodels.TenantInfo
 	if err := c.BodyParser(&tenantInfo); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	tenantInfo.Id = id
-	dbtenantInfo, err := conf.Conf{}.GetUserTenantInfoRepository().UpdateTenantinfo(tenantInfo)
+	dbtenantInfo, err := conf.Conf{}.GetUserTenantInfoRepository().UpdateTenantinfo(CreateStoreTenantInfo(tenantInfo, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -67,12 +59,11 @@ func UpdateTenantInfo(c *fiber.Ctx) error {
 // @Router /user/tenantinfo/{id} [post]
 func CreateTenantInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var tenantInfo models.TenantInfo
+	var tenantInfo requestmodels.TenantInfo
 	if err := c.BodyParser(&tenantInfo); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	tenantInfo.Id = id
-	dbtenantInfo, err := conf.Conf{}.GetUserTenantInfoRepository().CreateTenantinfo(tenantInfo)
+	dbtenantInfo, err := conf.Conf{}.GetUserTenantInfoRepository().CreateTenantinfo(CreateStoreTenantInfo(tenantInfo, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}

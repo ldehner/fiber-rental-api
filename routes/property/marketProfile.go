@@ -3,21 +3,9 @@ package propertyroutes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
+	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 )
-
-type MarketProfile struct {
-	Rent             float32 `json:"Rent"`
-	PowerPrice       float32 `json:"PowerPrice"`
-	Period           uint8   `json:"Period"`
-	MinimumPeriod    uint8   `json:"MinimumPeriod"`
-	MinimumIncome    float32 `json:"MinimumIncome"`
-	Id               string  `json:"Id"`
-	HeatPrice        float32 `json:"HeatPrice"`
-	Description      string  `json:"Description"`
-	AvailabilityDate string  `json:"AvailabilityDate"`
-	Deposit          float32 `json:"Deposit"`
-}
 
 // CreateMarketProfile godoc
 // @Summary Create a new market profile
@@ -29,11 +17,12 @@ type MarketProfile struct {
 // @Success 200 {object} MarketProfile
 // @Router /property/marketprofile/{id} [post]
 func CreateMarketProfile(c *fiber.Ctx) error {
-	var marketProfile models.MarketProfile
+	id := c.Params("id")
+	var marketProfile requestmodels.MarketProfile
 	if err := c.BodyParser(&marketProfile); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	dbmarketProfile, err := conf.Conf{}.GetPropertyMarketProfileRepository().CreateMarketProfile(marketProfile)
+	dbmarketProfile, err := conf.Conf{}.GetPropertyMarketProfileRepository().CreateMarketProfile(CreateStoreMarketProfile(marketProfile, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -70,12 +59,11 @@ func GetMarketProfile(c *fiber.Ctx) error {
 // @Router /property/marketprofile/{id} [put]
 func UpdateMarketProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var marketProfile models.MarketProfile
+	var marketProfile requestmodels.MarketProfile
 	if err := c.BodyParser(&marketProfile); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	marketProfile.Id = id
-	dbmarketProfile, err := conf.Conf{}.GetPropertyMarketProfileRepository().UpdateMarketProfile(marketProfile)
+	dbmarketProfile, err := conf.Conf{}.GetPropertyMarketProfileRepository().UpdateMarketProfile(CreateStoreMarketProfile(marketProfile, id))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -113,7 +101,7 @@ func GetMarketProfiles(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	var responseProperties []MarketProfile
+	var responseProperties []responsemodels.MarketProfile
 	for _, property := range marketProfiles {
 		responseProperties = append(responseProperties, CreateResponseMarketProfile(property))
 	}

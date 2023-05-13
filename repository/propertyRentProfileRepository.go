@@ -1,10 +1,10 @@
 package repository
 
-import "github.com/ldehner/fiber-rental-api/models"
+import storemodels "github.com/ldehner/fiber-rental-api/models/store"
 
 type PropertyRentProfileRepository interface {
-	CreateRentProfile(rentprofile models.RentProfile) (models.RentProfile, error)
-	UpdateRentProfile(rentprofile models.RentProfile) (models.RentProfile, error)
-	GetRentProfile(id string) (models.RentProfile, error)
+	CreateRentProfile(rentprofile storemodels.RentProfile) (storemodels.RentProfile, error)
+	UpdateRentProfile(rentprofile storemodels.RentProfile) (storemodels.RentProfile, error)
+	GetRentProfile(id string) (storemodels.RentProfile, error)
 	DeleteRentProfile(id string) error
 }

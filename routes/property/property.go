@@ -4,27 +4,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
+	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 )
-
-type Property struct {
-	Apartment   string `json:"Apartment"`
-	Balcony     bool   `json:"Balcony"`
-	City        string `json:"City"`
-	Country     string `json:"Country"`
-	Garage      bool   `json:"Garage"`
-	Garden      bool   `json:"Garden"`
-	HeatType    uint8  `json:"HeatType"`
-	Housenumber string `json:"Housenumber"`
-	Id          string `json:"Id"`
-	LandlordId  string `json:"Landlord"`
-	Rooms       uint8  `json:"Rooms"`
-	Size        uint16 `json:"Size"`
-	Status      int8   `json:"Status"`
-	Street      string `json:"Street"`
-	TenantId    string `json:"Tenant"`
-	Type        uint8  `json:"Type"`
-}
 
 // CreateProperty godoc
 // @Summary Create a new property
@@ -36,12 +18,11 @@ type Property struct {
 // @Success 200 {object} Property
 // @Router /property [post]
 func CreateProperty(c *fiber.Ctx) error {
-	var property models.Property
+	var property requestmodels.Property
 	if err := c.BodyParser(&property); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
-	property.Id = uuid.New().String()
-	dbproperty, err := conf.Conf{}.GetPropertyRepository().CreateProperty(property)
+	dbproperty, err := conf.Conf{}.GetPropertyRepository().CreateProperty(CreateStoreProperty(property, uuid.New().String()))
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
@@ -82,7 +63,7 @@ func GetProperties(c *fiber.Ctx) error {
 
 	}
 
-	var responseProperties []Property
+	var responseProperties []responsemodels.Property
 	for _, property := range properties {
 		responseProperties = append(responseProperties, CreateResponseProperty(property))
 	}
@@ -101,13 +82,12 @@ func GetProperties(c *fiber.Ctx) error {
 // @Router /property/{id} [patch]
 func UpdateProperty(c *fiber.Ctx) error {
 	id := c.Params("id")
-	var property models.Property
+	var property requestmodels.Property
 	if err := c.BodyParser(&property); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 
 	}
-	property.Id = id
-	dbproperty, err := conf.Conf{}.GetPropertyRepository().UpdateProperty(property)
+	dbproperty, err := conf.Conf{}.GetPropertyRepository().UpdateProperty(CreateStoreProperty(property, id))
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 

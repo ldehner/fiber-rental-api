@@ -4,16 +4,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/ldehner/fiber-rental-api/conf"
-	"github.com/ldehner/fiber-rental-api/models"
+	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
+	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
+	storemodels "github.com/ldehner/fiber-rental-api/models/store"
 )
-
-type Invite struct {
-	Id       string `json:"Id"`
-	Property string `json:"Property"`
-	Tenant   string `json:"Tenant"`
-	Landlord string `json:"Landlord"`
-	ValidDue string `json:"ValidDue"`
-}
 
 // CreateInvite godoc
 // @Summary Create an invite
@@ -25,13 +19,12 @@ type Invite struct {
 // @Success 200 {object} Invite
 // @Router /property/invite/{propertyId} [get]
 func CreateInvite(c *fiber.Ctx) error {
-	var invite models.Invite
+	var invite requestmodels.Invite
 	if err := c.BodyParser(&invite); err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	invite.Id = uuid.New().String()
 	invite.Property = c.Params("propertyId")
-	dbinvite, err := conf.Conf{}.GetPropertyRepository().CreatePropertyInvite(invite)
+	dbinvite, err := conf.Conf{}.GetPropertyRepository().CreatePropertyInvite(CreateStoreInvite(invite, uuid.New().String()))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -51,8 +44,8 @@ func CreateInvite(c *fiber.Ctx) error {
 func AcceptInvite(c *fiber.Ctx) error {
 	id := c.Params("id")
 	userId := c.Params("userId")
-
-	var prop models.Property
+	var invite storemodels.Invite
+	var prop responsemodels.Property
 	invite, err := conf.Conf{}.GetPropertyRepository().GetPropertyInvites(id)
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
@@ -62,17 +55,17 @@ func AcceptInvite(c *fiber.Ctx) error {
 		if err != nil {
 			return c.Status(fiber.StatusConflict).SendString(err.Error())
 		}
-		prop = property
+		prop = CreateResponseProperty(property)
 	} else {
 		property, err := conf.Conf{}.GetPropertyRepository().UpdatePropertyTenant(invite.Property, userId)
 		if err != nil {
 			return c.Status(fiber.StatusConflict).SendString(err.Error())
 		}
-		prop = property
+		prop = CreateResponseProperty(property)
 	}
 	derr := conf.Conf{}.GetPropertyRepository().DeletePropertyInvite(id)
 	if derr != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
-	return c.Status(fiber.StatusOK).JSON(CreateResponseProperty(prop))
+	return c.Status(fiber.StatusOK).JSON(prop)
 }

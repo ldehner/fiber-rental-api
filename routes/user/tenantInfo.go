@@ -13,7 +13,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Success 302 {object} TenantInfo
+// @Success 302 {object} responsemodels.TenantInfo
 // @Router /user/tenantinfo/{id} [get]
 func GetTenantInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -31,9 +31,9 @@ func GetTenantInfo(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Param tenantInfo body TenantInfo true "Tenant Info"
-// @Success 200 {object} TenantInfo
-// @Router /user/tenantinfo/{id} [patch]
+// @Param tenantInfo body requestmodels.TenantInfo true "Tenant Info"
+// @Success 200 {object} responsemodels.TenantInfo
+// @Router /user/tenantinfo/{id} [put]
 func UpdateTenantInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var tenantInfo requestmodels.TenantInfo
@@ -54,8 +54,8 @@ func UpdateTenantInfo(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Param tenantInfo body TenantInfo true "Tenant Info"
-// @Success 201 {object} TenantInfo
+// @Param tenantInfo body requestmodels.TenantInfo true "Tenant Info"
+// @Success 201 {object} responsemodels.TenantInfo
 // @Router /user/tenantinfo/{id} [post]
 func CreateTenantInfo(c *fiber.Ctx) error {
 	id := c.Params("id")

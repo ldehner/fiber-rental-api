@@ -1,6 +1,8 @@
 package propertyroutes
 
 import (
+	"time"
+
 	requestmodels "github.com/ldehner/fiber-rental-api/models/request"
 	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 	storemodels "github.com/ldehner/fiber-rental-api/models/store"
@@ -60,7 +62,6 @@ func CreateResponseInvite(invite storemodels.Invite) responsemodels.Invite {
 		Property: invite.Property,
 		Tenant:   invite.Tenant,
 		Landlord: invite.Landlord,
-		ValidDue: invite.ValidDue,
 	}
 }
 func CreateResponseIncident(incident storemodels.Incident) responsemodels.Incident {
@@ -124,13 +125,13 @@ func CreateStoreRentProfile(rentProfile requestmodels.RentProfile, id string) st
 	}
 }
 
-func CreateStoreInvite(invite requestmodels.Invite, id string) storemodels.Invite {
+func CreateStoreInvite(invite requestmodels.Invite, id string, date time.Time) storemodels.Invite {
 	return storemodels.Invite{
 		Id:       id,
 		Property: invite.Property,
 		Tenant:   invite.Tenant,
 		Landlord: invite.Landlord,
-		ValidDue: invite.ValidDue,
+		ValidDue: date,
 	}
 }
 func CreateStoreIncident(incident requestmodels.Incident, id string, propertyId string) storemodels.Incident {

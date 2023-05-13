@@ -13,8 +13,8 @@ import (
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Param searchProfile body SearchProfile true "Search Profile"
-// @Success 201 {object} SearchProfile
+// @Param searchProfile body requestmodels.SearchProfile true "Search Profile"
+// @Success 201 {object} responsemodels.SearchProfile
 // @Router /user/searchprofile/{id} [post]
 func CreateSearchProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -36,7 +36,7 @@ func CreateSearchProfile(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Success 302 {object} SearchProfile
+// @Success 302 {object} responsemodels.SearchProfile
 // @Router /user/searchprofile/{id} [get]
 func GetSearchProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -54,9 +54,9 @@ func GetSearchProfile(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Param searchProfile body SearchProfile true "Search Profile"
-// @Success 200 {object} SearchProfile
-// @Router /user/searchprofile/{id} [patch]
+// @Param searchProfile body requestmodels.SearchProfile true "Search Profile"
+// @Success 200 {object} responsemodels.SearchProfile
+// @Router /user/searchprofile/{id} [put]
 func UpdateSearchProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var searchProfile requestmodels.SearchProfile

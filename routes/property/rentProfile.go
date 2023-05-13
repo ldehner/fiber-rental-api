@@ -12,8 +12,8 @@ import (
 // @ID create-rent-profile
 // @Accept  json
 // @Produce  json
-// @Param rentProfile body RentProfile true "Rent Profile"
-// @Success 200 {object} RentProfile
+// @Param rentProfile body requestmodels.RentProfile true "Rent Profile"
+// @Success 200 {object} responsemodels.RentProfile
 // @Router /property/rentprofile/{id} [post]
 func CreateRentProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -35,7 +35,7 @@ func CreateRentProfile(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Rent Profile ID"
-// @Success 302 {object} RentProfile
+// @Success 302 {object} responsemodels.RentProfile
 // @Router /property/rentprofile/{id} [get]
 func GetRentProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -53,9 +53,9 @@ func GetRentProfile(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Rent Profile ID"
-// @Param rentProfile body RentProfile true "Rent Profile"
-// @Success 200 {object} RentProfile
-// @Router /property/rentprofile/{id} [patch]
+// @Param rentProfile body requestmodels.RentProfile true "Rent Profile"
+// @Success 200 {object} responsemodels.RentProfile
+// @Router /property/rentprofile/{id} [put]
 func UpdateRentProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var rentProfile requestmodels.RentProfile

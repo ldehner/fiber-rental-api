@@ -13,8 +13,8 @@ import (
 // @Tags MarketProfile
 // @Accept  json
 // @Produce  json
-// @Param marketProfile body MarketProfile true "Market Profile"
-// @Success 200 {object} MarketProfile
+// @Param marketProfile body requestmodels.MarketProfile true "Market Profile"
+// @Success 200 {object} responsemodels.MarketProfile
 // @Router /property/marketprofile/{id} [post]
 func CreateMarketProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -36,7 +36,7 @@ func CreateMarketProfile(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Market Profile ID"
-// @Success 302 {object} MarketProfile
+// @Success 302 {object} responsemodels.MarketProfile
 // @Router /property/marketprofile/{id} [get]
 func GetMarketProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -54,8 +54,8 @@ func GetMarketProfile(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Market Profile ID"
-// @Param marketProfile body MarketProfile true "Market Profile"
-// @Success 200 {object} MarketProfile
+// @Param marketProfile body requestmodels.MarketProfile true "Market Profile"
+// @Success 200 {object} responsemodels.MarketProfile
 // @Router /property/marketprofile/{id} [put]
 func UpdateMarketProfile(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -94,7 +94,7 @@ func DeleteMarketProfile(c *fiber.Ctx) error {
 // @Tags MarketProfile
 // @Accept  json
 // @Produce  json
-// @Success 302 {array} MarketProfile
+// @Success 302 {array} responsemodels.MarketProfile
 // @Router /property/marketprofiles [get]
 func GetMarketProfiles(c *fiber.Ctx) error {
 	marketProfiles, err := conf.Conf{}.GetPropertyMarketProfileRepository().GetMarketProfiles()

@@ -77,7 +77,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/propertyroutes.Incident"
+                                "$ref": "#/definitions/responsemodels.Incident"
                             }
                         }
                     }
@@ -110,7 +110,52 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Incident"
+                            "$ref": "#/definitions/responsemodels.Incident"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update an incident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "incidents"
+                ],
+                "summary": "Update an incident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Incident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Incident",
+                        "name": "incident",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodels.Incident"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -150,51 +195,6 @@ const docTemplate = `{
                         }
                     }
                 }
-            },
-            "patch": {
-                "description": "Update an incident",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "incidents"
-                ],
-                "summary": "Update an incident",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Incident ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Incident",
-                        "name": "incident",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/propertyroutes.Incident"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
             }
         },
         "/incidents/{propertyId}": {
@@ -217,7 +217,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Incident"
+                            "$ref": "#/definitions/requestmodels.Incident"
                         }
                     }
                 ],
@@ -256,7 +256,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/propertyroutes.Property"
+                                "$ref": "#/definitions/responsemodels.Property"
                             }
                         }
                     }
@@ -281,7 +281,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Property"
+                            "$ref": "#/definitions/requestmodels.Property"
                         }
                     }
                 ],
@@ -289,7 +289,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Property"
+                            "$ref": "#/definitions/responsemodels.Property"
                         }
                     }
                 }
@@ -328,7 +328,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Invite"
+                            "$ref": "#/definitions/responsemodels.Property"
                         }
                     }
                 }
@@ -354,22 +354,22 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Invite"
+                            "$ref": "#/definitions/requestmodels.Invite"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "InviteId",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Invite"
+                            "type": "string"
                         }
                     }
                 }
             }
         },
         "/property/landlord/{id}/{landlordId}": {
-            "patch": {
+            "put": {
                 "description": "Update a property landlord",
                 "consumes": [
                     "application/json"
@@ -430,7 +430,7 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            "$ref": "#/definitions/responsemodels.MarketProfile"
                         }
                     }
                 }
@@ -461,7 +461,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            "$ref": "#/definitions/requestmodels.MarketProfile"
                         }
                     }
                 ],
@@ -469,7 +469,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            "$ref": "#/definitions/responsemodels.MarketProfile"
                         }
                     }
                 }
@@ -493,7 +493,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            "$ref": "#/definitions/requestmodels.MarketProfile"
                         }
                     }
                 ],
@@ -501,7 +501,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.MarketProfile"
+                            "$ref": "#/definitions/responsemodels.MarketProfile"
                         }
                     }
                 }
@@ -553,7 +553,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/propertyroutes.MarketProfile"
+                                "$ref": "#/definitions/responsemodels.MarketProfile"
                             }
                         }
                     }
@@ -584,7 +584,44 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                            "$ref": "#/definitions/responsemodels.RentProfile"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a rent profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Update a rent profile",
+                "operationId": "update-rent-profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Rent Profile ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Rent Profile",
+                        "name": "rentProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodels.RentProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodels.RentProfile"
                         }
                     }
                 }
@@ -606,7 +643,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                            "$ref": "#/definitions/requestmodels.RentProfile"
                         }
                     }
                 ],
@@ -614,7 +651,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.RentProfile"
+                            "$ref": "#/definitions/responsemodels.RentProfile"
                         }
                     }
                 }
@@ -643,47 +680,10 @@ const docTemplate = `{
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                "description": "Update a rent profile",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "Update a rent profile",
-                "operationId": "update-rent-profile",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Rent Profile ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Rent Profile",
-                        "name": "rentProfile",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/propertyroutes.RentProfile"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/propertyroutes.RentProfile"
-                        }
-                    }
-                }
             }
         },
         "/property/tenant/{id}/{tenantId}": {
-            "patch": {
+            "put": {
                 "description": "Update a property tenant",
                 "consumes": [
                     "application/json"
@@ -744,7 +744,46 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/propertyroutes.Property"
+                            "$ref": "#/definitions/responsemodels.Property"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a property",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Property"
+                ],
+                "summary": "Update a property",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Property",
+                        "name": "property",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodels.Property"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodels.Property"
                         }
                     }
                 }
@@ -775,45 +814,6 @@ const docTemplate = `{
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                "description": "Update a property",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Property"
-                ],
-                "summary": "Update a property",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Property ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Property",
-                        "name": "property",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/propertyroutes.Property"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/propertyroutes.Property"
-                        }
-                    }
-                }
             }
         },
         "/user": {
@@ -835,7 +835,7 @@ const docTemplate = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/userroutes.User"
+                                "$ref": "#/definitions/responsemodels.User"
                             }
                         }
                     }
@@ -843,7 +843,7 @@ const docTemplate = `{
             }
         },
         "/user/contactinfo/{id}": {
-            "patch": {
+            "put": {
                 "description": "Update a user's contact info",
                 "consumes": [
                     "application/json"
@@ -869,7 +869,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/userroutes.ContactInfo"
+                            "$ref": "#/definitions/requestmodels.ContactInfo"
                         }
                     }
                 ],
@@ -877,7 +877,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/responsemodels.User"
                         }
                     }
                 }
@@ -903,7 +903,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/requestmodels.User"
                         }
                     }
                 ],
@@ -911,7 +911,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/responsemodels.User"
                         }
                     }
                 }
@@ -943,7 +943,46 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.SearchProfile"
+                            "$ref": "#/definitions/responsemodels.SearchProfile"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a user's search profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user's search profile",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Search Profile",
+                        "name": "searchProfile",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodels.SearchProfile"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodels.SearchProfile"
                         }
                     }
                 }
@@ -974,7 +1013,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/userroutes.SearchProfile"
+                            "$ref": "#/definitions/requestmodels.SearchProfile"
                         }
                     }
                 ],
@@ -982,7 +1021,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.SearchProfile"
+                            "$ref": "#/definitions/responsemodels.SearchProfile"
                         }
                     }
                 }
@@ -1013,45 +1052,6 @@ const docTemplate = `{
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                "description": "Update a user's search profile",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Update a user's search profile",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Search Profile",
-                        "name": "searchProfile",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/userroutes.SearchProfile"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/userroutes.SearchProfile"
-                        }
-                    }
-                }
             }
         },
         "/user/tenantinfo/{id}": {
@@ -1080,7 +1080,46 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.TenantInfo"
+                            "$ref": "#/definitions/responsemodels.TenantInfo"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a user's tenant info",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a user's tenant info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Tenant Info",
+                        "name": "tenantInfo",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodels.TenantInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodels.TenantInfo"
                         }
                     }
                 }
@@ -1111,7 +1150,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/userroutes.TenantInfo"
+                            "$ref": "#/definitions/requestmodels.TenantInfo"
                         }
                     }
                 ],
@@ -1119,7 +1158,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.TenantInfo"
+                            "$ref": "#/definitions/responsemodels.TenantInfo"
                         }
                     }
                 }
@@ -1150,49 +1189,10 @@ const docTemplate = `{
                         "description": "OK"
                     }
                 }
-            },
-            "patch": {
-                "description": "Update a user's tenant info",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Update a user's tenant info",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Tenant Info",
-                        "name": "tenantInfo",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/userroutes.TenantInfo"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/userroutes.TenantInfo"
-                        }
-                    }
-                }
             }
         },
         "/user/update": {
-            "patch": {
+            "put": {
                 "description": "Update a user",
                 "consumes": [
                     "application/json"
@@ -1211,7 +1211,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/requestmodels.User"
                         }
                     }
                 ],
@@ -1219,7 +1219,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/responsemodels.User"
                         }
                     }
                 }
@@ -1251,7 +1251,7 @@ const docTemplate = `{
                     "302": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/userroutes.User"
+                            "$ref": "#/definitions/responsemodels.User"
                         }
                     }
                 }
@@ -1286,7 +1286,238 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "propertyroutes.Incident": {
+        "requestmodels.ContactInfo": {
+            "type": "object",
+            "properties": {
+                "Mail": {
+                    "type": "string"
+                },
+                "Phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodels.Incident": {
+            "type": "object",
+            "properties": {
+                "Description": {
+                    "type": "string"
+                },
+                "Landlord": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "Tenant": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requestmodels.Invite": {
+            "type": "object",
+            "properties": {
+                "Landlord": {
+                    "type": "string"
+                },
+                "Property": {
+                    "type": "string"
+                },
+                "Tenant": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodels.MarketProfile": {
+            "type": "object",
+            "properties": {
+                "AvailabilityDate": {
+                    "type": "string"
+                },
+                "Deposit": {
+                    "type": "number"
+                },
+                "Description": {
+                    "type": "string"
+                },
+                "HeatPrice": {
+                    "type": "number"
+                },
+                "MinimumIncome": {
+                    "type": "number"
+                },
+                "MinimumPeriod": {
+                    "type": "integer"
+                },
+                "Period": {
+                    "type": "integer"
+                },
+                "PowerPrice": {
+                    "type": "number"
+                },
+                "Rent": {
+                    "type": "number"
+                }
+            }
+        },
+        "requestmodels.Property": {
+            "type": "object",
+            "properties": {
+                "Apartment": {
+                    "type": "string"
+                },
+                "Balcony": {
+                    "type": "boolean"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "Garage": {
+                    "type": "boolean"
+                },
+                "Garden": {
+                    "type": "boolean"
+                },
+                "HeatType": {
+                    "type": "integer"
+                },
+                "Housenumber": {
+                    "type": "string"
+                },
+                "Landlord": {
+                    "type": "string"
+                },
+                "Rooms": {
+                    "type": "integer"
+                },
+                "Size": {
+                    "type": "integer"
+                },
+                "Status": {
+                    "type": "integer"
+                },
+                "Street": {
+                    "type": "string"
+                },
+                "Tenant": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requestmodels.RentProfile": {
+            "type": "object",
+            "properties": {
+                "ContractDue": {
+                    "type": "string"
+                },
+                "Deposit": {
+                    "type": "number"
+                },
+                "HeatCosts": {
+                    "type": "number"
+                },
+                "Minimum": {
+                    "type": "integer"
+                },
+                "Rent": {
+                    "type": "number"
+                },
+                "RentalStart": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodels.SearchProfile": {
+            "type": "object",
+            "properties": {
+                "Budget": {
+                    "type": "number"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "Radius": {
+                    "type": "number"
+                },
+                "Rooms": {
+                    "type": "integer"
+                },
+                "Size": {
+                    "type": "integer"
+                },
+                "Street": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "integer"
+                },
+                "Zipcode": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodels.TenantInfo": {
+            "type": "object",
+            "properties": {
+                "CriminalRecord": {
+                    "type": "boolean"
+                },
+                "Income": {
+                    "type": "number"
+                },
+                "IncomeProof": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "requestmodels.User": {
+            "type": "object",
+            "properties": {
+                "Apartment": {
+                    "type": "string"
+                },
+                "City": {
+                    "type": "string"
+                },
+                "Country": {
+                    "type": "string"
+                },
+                "First": {
+                    "type": "string"
+                },
+                "Housenumber": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Last": {
+                    "type": "string"
+                },
+                "Mail": {
+                    "type": "string"
+                },
+                "Phone": {
+                    "type": "string"
+                },
+                "Street": {
+                    "type": "string"
+                }
+            }
+        },
+        "responsemodels.Incident": {
             "type": "object",
             "properties": {
                 "Description": {
@@ -1312,27 +1543,7 @@ const docTemplate = `{
                 }
             }
         },
-        "propertyroutes.Invite": {
-            "type": "object",
-            "properties": {
-                "Id": {
-                    "type": "string"
-                },
-                "Landlord": {
-                    "type": "string"
-                },
-                "Property": {
-                    "type": "string"
-                },
-                "Tenant": {
-                    "type": "string"
-                },
-                "ValidDue": {
-                    "type": "string"
-                }
-            }
-        },
-        "propertyroutes.MarketProfile": {
+        "responsemodels.MarketProfile": {
             "type": "object",
             "properties": {
                 "AvailabilityDate": {
@@ -1367,7 +1578,7 @@ const docTemplate = `{
                 }
             }
         },
-        "propertyroutes.Property": {
+        "responsemodels.Property": {
             "type": "object",
             "properties": {
                 "Apartment": {
@@ -1420,7 +1631,7 @@ const docTemplate = `{
                 }
             }
         },
-        "propertyroutes.RentProfile": {
+        "responsemodels.RentProfile": {
             "type": "object",
             "properties": {
                 "ContractDue": {
@@ -1446,18 +1657,7 @@ const docTemplate = `{
                 }
             }
         },
-        "userroutes.ContactInfo": {
-            "type": "object",
-            "properties": {
-                "Mail": {
-                    "type": "string"
-                },
-                "Phone": {
-                    "type": "string"
-                }
-            }
-        },
-        "userroutes.SearchProfile": {
+        "responsemodels.SearchProfile": {
             "type": "object",
             "properties": {
                 "Budget": {
@@ -1484,12 +1684,15 @@ const docTemplate = `{
                 "Type": {
                     "type": "integer"
                 },
+                "UserId": {
+                    "type": "string"
+                },
                 "Zipcode": {
                     "type": "string"
                 }
             }
         },
-        "userroutes.TenantInfo": {
+        "responsemodels.TenantInfo": {
             "type": "object",
             "properties": {
                 "CriminalRecord": {
@@ -1506,7 +1709,7 @@ const docTemplate = `{
                 }
             }
         },
-        "userroutes.User": {
+        "responsemodels.User": {
             "type": "object",
             "properties": {
                 "Apartment": {

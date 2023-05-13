@@ -14,7 +14,7 @@ import (
 // @Tags incidents
 // @Accept  json
 // @Produce  json
-// @Param incident body Incident true "Incident"
+// @Param incident body requestmodels.Incident true "Incident"
 // @Success 200 {string} string "OK"
 // @Failure 400 {string} string "Bad Request"
 // @Router /incidents/{propertyId} [post]
@@ -38,7 +38,7 @@ func CreateIncident(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Incident ID"
-// @Success 302 {object} Incident
+// @Success 302 {object} responsemodels.Incident
 // @Router /incident/{propertyId}/{incidentId} [get]
 func GetIncident(c *fiber.Ctx) error {
 	propertyId := c.Params("propertyId")
@@ -57,7 +57,7 @@ func GetIncident(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param propertyId path string true "Property ID"
-// @Success 302 {array} Incident
+// @Success 302 {array} responsemodels.Incident
 // @Router /incident/{propertyId} [get]
 func GetIncidents(c *fiber.Ctx) error {
 	propertyId := c.Params("propertyId")
@@ -79,10 +79,10 @@ func GetIncidents(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Incident ID"
-// @Param incident body Incident true "Incident"
+// @Param incident body requestmodels.Incident true "Incident"
 // @Success 200 {string} string "OK"
 // @Failure 400 {string} string "Bad Request"
-// @Router /incident/{propertyId}/{incidentId} [patch]
+// @Router /incident/{propertyId}/{incidentId} [put]
 func UpdateIncident(c *fiber.Ctx) error {
 	propertyId := c.Params("propertyId")
 	incidentId := c.Params("incidentId")

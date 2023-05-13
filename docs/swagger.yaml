@@ -1,6 +1,157 @@
 basePath: /
 definitions:
-  propertyroutes.Incident:
+  requestmodels.ContactInfo:
+    properties:
+      Mail:
+        type: string
+      Phone:
+        type: string
+    type: object
+  requestmodels.Incident:
+    properties:
+      Description:
+        type: string
+      Landlord:
+        type: string
+      Status:
+        type: integer
+      Tenant:
+        type: string
+      Type:
+        type: integer
+    type: object
+  requestmodels.Invite:
+    properties:
+      Landlord:
+        type: string
+      Property:
+        type: string
+      Tenant:
+        type: string
+    type: object
+  requestmodels.MarketProfile:
+    properties:
+      AvailabilityDate:
+        type: string
+      Deposit:
+        type: number
+      Description:
+        type: string
+      HeatPrice:
+        type: number
+      MinimumIncome:
+        type: number
+      MinimumPeriod:
+        type: integer
+      Period:
+        type: integer
+      PowerPrice:
+        type: number
+      Rent:
+        type: number
+    type: object
+  requestmodels.Property:
+    properties:
+      Apartment:
+        type: string
+      Balcony:
+        type: boolean
+      City:
+        type: string
+      Country:
+        type: string
+      Garage:
+        type: boolean
+      Garden:
+        type: boolean
+      HeatType:
+        type: integer
+      Housenumber:
+        type: string
+      Landlord:
+        type: string
+      Rooms:
+        type: integer
+      Size:
+        type: integer
+      Status:
+        type: integer
+      Street:
+        type: string
+      Tenant:
+        type: string
+      Type:
+        type: integer
+    type: object
+  requestmodels.RentProfile:
+    properties:
+      ContractDue:
+        type: string
+      Deposit:
+        type: number
+      HeatCosts:
+        type: number
+      Minimum:
+        type: integer
+      Rent:
+        type: number
+      RentalStart:
+        type: string
+    type: object
+  requestmodels.SearchProfile:
+    properties:
+      Budget:
+        type: number
+      City:
+        type: string
+      Country:
+        type: string
+      Radius:
+        type: number
+      Rooms:
+        type: integer
+      Size:
+        type: integer
+      Street:
+        type: string
+      Type:
+        type: integer
+      Zipcode:
+        type: string
+    type: object
+  requestmodels.TenantInfo:
+    properties:
+      CriminalRecord:
+        type: boolean
+      Income:
+        type: number
+      IncomeProof:
+        type: boolean
+    type: object
+  requestmodels.User:
+    properties:
+      Apartment:
+        type: string
+      City:
+        type: string
+      Country:
+        type: string
+      First:
+        type: string
+      Housenumber:
+        type: string
+      Id:
+        type: string
+      Last:
+        type: string
+      Mail:
+        type: string
+      Phone:
+        type: string
+      Street:
+        type: string
+    type: object
+  responsemodels.Incident:
     properties:
       Description:
         type: string
@@ -17,20 +168,7 @@ definitions:
       Type:
         type: integer
     type: object
-  propertyroutes.Invite:
-    properties:
-      Id:
-        type: string
-      Landlord:
-        type: string
-      Property:
-        type: string
-      Tenant:
-        type: string
-      ValidDue:
-        type: string
-    type: object
-  propertyroutes.MarketProfile:
+  responsemodels.MarketProfile:
     properties:
       AvailabilityDate:
         type: string
@@ -53,7 +191,7 @@ definitions:
       Rent:
         type: number
     type: object
-  propertyroutes.Property:
+  responsemodels.Property:
     properties:
       Apartment:
         type: string
@@ -88,7 +226,7 @@ definitions:
       Type:
         type: integer
     type: object
-  propertyroutes.RentProfile:
+  responsemodels.RentProfile:
     properties:
       ContractDue:
         type: string
@@ -105,14 +243,7 @@ definitions:
       RentalStart:
         type: string
     type: object
-  userroutes.ContactInfo:
-    properties:
-      Mail:
-        type: string
-      Phone:
-        type: string
-    type: object
-  userroutes.SearchProfile:
+  responsemodels.SearchProfile:
     properties:
       Budget:
         type: number
@@ -130,10 +261,12 @@ definitions:
         type: string
       Type:
         type: integer
+      UserId:
+        type: string
       Zipcode:
         type: string
     type: object
-  userroutes.TenantInfo:
+  responsemodels.TenantInfo:
     properties:
       CriminalRecord:
         type: boolean
@@ -144,7 +277,7 @@ definitions:
       IncomeProof:
         type: boolean
     type: object
-  userroutes.User:
+  responsemodels.User:
     properties:
       Apartment:
         type: string
@@ -215,7 +348,7 @@ paths:
           description: Found
           schema:
             items:
-              $ref: '#/definitions/propertyroutes.Incident'
+              $ref: '#/definitions/responsemodels.Incident'
             type: array
       summary: Get all incidents
       tags:
@@ -261,11 +394,11 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/propertyroutes.Incident'
+            $ref: '#/definitions/responsemodels.Incident'
       summary: Get an incident
       tags:
       - incidents
-    patch:
+    put:
       consumes:
       - application/json
       description: Update an incident
@@ -280,7 +413,7 @@ paths:
         name: incident
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.Incident'
+          $ref: '#/definitions/requestmodels.Incident'
       produces:
       - application/json
       responses:
@@ -306,7 +439,7 @@ paths:
         name: incident
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.Incident'
+          $ref: '#/definitions/requestmodels.Incident'
       produces:
       - application/json
       responses:
@@ -333,7 +466,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/propertyroutes.Property'
+              $ref: '#/definitions/responsemodels.Property'
             type: array
       summary: Get all properties
       tags:
@@ -348,14 +481,14 @@ paths:
         name: property
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.Property'
+          $ref: '#/definitions/requestmodels.Property'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.Property'
+            $ref: '#/definitions/responsemodels.Property'
       summary: Create a new property
       tags:
       - Property
@@ -394,11 +527,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.Property'
+            $ref: '#/definitions/responsemodels.Property'
       summary: Get a property
       tags:
       - Property
-    patch:
+    put:
       consumes:
       - application/json
       description: Update a property
@@ -413,14 +546,14 @@ paths:
         name: property
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.Property'
+          $ref: '#/definitions/requestmodels.Property'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.Property'
+            $ref: '#/definitions/responsemodels.Property'
       summary: Update a property
       tags:
       - Property
@@ -446,7 +579,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.Invite'
+            $ref: '#/definitions/responsemodels.Property'
       summary: Accept an invite
       tags:
       - Property
@@ -461,19 +594,19 @@ paths:
         name: invite
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.Invite'
+          $ref: '#/definitions/requestmodels.Invite'
       produces:
       - application/json
       responses:
         "200":
-          description: OK
+          description: InviteId
           schema:
-            $ref: '#/definitions/propertyroutes.Invite'
+            type: string
       summary: Create an invite
       tags:
       - Property
   /property/landlord/{id}/{landlordId}:
-    patch:
+    put:
       consumes:
       - application/json
       description: Update a property landlord
@@ -531,7 +664,7 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/propertyroutes.MarketProfile'
+            $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Get a market profile
       tags:
       - MarketProfile
@@ -545,14 +678,14 @@ paths:
         name: marketProfile
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.MarketProfile'
+          $ref: '#/definitions/requestmodels.MarketProfile'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.MarketProfile'
+            $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Create a new market profile
       tags:
       - MarketProfile
@@ -571,14 +704,14 @@ paths:
         name: marketProfile
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.MarketProfile'
+          $ref: '#/definitions/requestmodels.MarketProfile'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.MarketProfile'
+            $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Update a market profile
       tags:
       - MarketProfile
@@ -594,7 +727,7 @@ paths:
           description: Found
           schema:
             items:
-              $ref: '#/definitions/propertyroutes.MarketProfile'
+              $ref: '#/definitions/responsemodels.MarketProfile'
             type: array
       summary: Get all market profiles
       tags:
@@ -634,9 +767,29 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/propertyroutes.RentProfile'
+            $ref: '#/definitions/responsemodels.RentProfile'
       summary: Get a rent profile
-    patch:
+    post:
+      consumes:
+      - application/json
+      description: Create a rent profile
+      operationId: create-rent-profile
+      parameters:
+      - description: Rent Profile
+        in: body
+        name: rentProfile
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodels.RentProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodels.RentProfile'
+      summary: Create a rent profile
+    put:
       consumes:
       - application/json
       description: Update a rent profile
@@ -652,37 +805,17 @@ paths:
         name: rentProfile
         required: true
         schema:
-          $ref: '#/definitions/propertyroutes.RentProfile'
+          $ref: '#/definitions/requestmodels.RentProfile'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/propertyroutes.RentProfile'
+            $ref: '#/definitions/responsemodels.RentProfile'
       summary: Update a rent profile
-    post:
-      consumes:
-      - application/json
-      description: Create a rent profile
-      operationId: create-rent-profile
-      parameters:
-      - description: Rent Profile
-        in: body
-        name: rentProfile
-        required: true
-        schema:
-          $ref: '#/definitions/propertyroutes.RentProfile'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/propertyroutes.RentProfile'
-      summary: Create a rent profile
   /property/tenant/{id}/{tenantId}:
-    patch:
+    put:
       consumes:
       - application/json
       description: Update a property tenant
@@ -717,7 +850,7 @@ paths:
           description: Found
           schema:
             items:
-              $ref: '#/definitions/userroutes.User'
+              $ref: '#/definitions/responsemodels.User'
             type: array
       summary: Get all users
       tags:
@@ -757,12 +890,12 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/userroutes.User'
+            $ref: '#/definitions/responsemodels.User'
       summary: Get a user
       tags:
       - user
   /user/contactinfo/{id}:
-    patch:
+    put:
       consumes:
       - application/json
       description: Update a user's contact info
@@ -777,14 +910,14 @@ paths:
         name: contactInfo
         required: true
         schema:
-          $ref: '#/definitions/userroutes.ContactInfo'
+          $ref: '#/definitions/requestmodels.ContactInfo'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/userroutes.User'
+            $ref: '#/definitions/responsemodels.User'
       summary: Update a user's contact info
       tags:
       - user
@@ -799,14 +932,14 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/userroutes.User'
+          $ref: '#/definitions/requestmodels.User'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/userroutes.User'
+            $ref: '#/definitions/responsemodels.User'
       summary: Create a new user
       tags:
       - user
@@ -845,34 +978,8 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/userroutes.SearchProfile'
+            $ref: '#/definitions/responsemodels.SearchProfile'
       summary: Get a user's search profile
-      tags:
-      - user
-    patch:
-      consumes:
-      - application/json
-      description: Update a user's search profile
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Search Profile
-        in: body
-        name: searchProfile
-        required: true
-        schema:
-          $ref: '#/definitions/userroutes.SearchProfile'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/userroutes.SearchProfile'
-      summary: Update a user's search profile
       tags:
       - user
     post:
@@ -890,15 +997,41 @@ paths:
         name: searchProfile
         required: true
         schema:
-          $ref: '#/definitions/userroutes.SearchProfile'
+          $ref: '#/definitions/requestmodels.SearchProfile'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/userroutes.SearchProfile'
+            $ref: '#/definitions/responsemodels.SearchProfile'
       summary: Create a user's search profile
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: Update a user's search profile
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Search Profile
+        in: body
+        name: searchProfile
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodels.SearchProfile'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodels.SearchProfile'
+      summary: Update a user's search profile
       tags:
       - user
   /user/tenantinfo/{id}:
@@ -936,34 +1069,8 @@ paths:
         "302":
           description: Found
           schema:
-            $ref: '#/definitions/userroutes.TenantInfo'
+            $ref: '#/definitions/responsemodels.TenantInfo'
       summary: Get a user's tenant info
-      tags:
-      - user
-    patch:
-      consumes:
-      - application/json
-      description: Update a user's tenant info
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Tenant Info
-        in: body
-        name: tenantInfo
-        required: true
-        schema:
-          $ref: '#/definitions/userroutes.TenantInfo'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/userroutes.TenantInfo'
-      summary: Update a user's tenant info
       tags:
       - user
     post:
@@ -981,19 +1088,45 @@ paths:
         name: tenantInfo
         required: true
         schema:
-          $ref: '#/definitions/userroutes.TenantInfo'
+          $ref: '#/definitions/requestmodels.TenantInfo'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/userroutes.TenantInfo'
+            $ref: '#/definitions/responsemodels.TenantInfo'
       summary: Create a user's tenant info
       tags:
       - user
+    put:
+      consumes:
+      - application/json
+      description: Update a user's tenant info
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Tenant Info
+        in: body
+        name: tenantInfo
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodels.TenantInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodels.TenantInfo'
+      summary: Update a user's tenant info
+      tags:
+      - user
   /user/update:
-    patch:
+    put:
       consumes:
       - application/json
       description: Update a user
@@ -1003,14 +1136,14 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/userroutes.User'
+          $ref: '#/definitions/requestmodels.User'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/userroutes.User'
+            $ref: '#/definitions/responsemodels.User'
       summary: Update a user
       tags:
       - user

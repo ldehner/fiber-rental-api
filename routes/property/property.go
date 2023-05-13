@@ -14,8 +14,8 @@ import (
 // @Tags Property
 // @Accept  json
 // @Produce  json
-// @Param property body Property true "Property"
-// @Success 200 {object} Property
+// @Param property body requestmodels.Property true "Property"
+// @Success 200 {object} responsemodels.Property
 // @Router /property [post]
 func CreateProperty(c *fiber.Ctx) error {
 	var property requestmodels.Property
@@ -36,7 +36,7 @@ func CreateProperty(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Property ID"
-// @Success 200 {object} Property
+// @Success 200 {object} responsemodels.Property
 // @Router /property/{id} [get]
 func GetProperty(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -54,7 +54,7 @@ func GetProperty(c *fiber.Ctx) error {
 // @Tags Property
 // @Accept  json
 // @Produce  json
-// @Success 200 {array} Property
+// @Success 200 {array} responsemodels.Property
 // @Router /property [get]
 func GetProperties(c *fiber.Ctx) error {
 	properties, err := conf.Conf{}.GetPropertyRepository().GetProperties()
@@ -77,9 +77,9 @@ func GetProperties(c *fiber.Ctx) error {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Property ID"
-// @Param property body Property true "Property"
-// @Success 200 {object} Property
-// @Router /property/{id} [patch]
+// @Param property body requestmodels.Property true "Property"
+// @Success 200 {object} responsemodels.Property
+// @Router /property/{id} [put]
 func UpdateProperty(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var property requestmodels.Property
@@ -123,7 +123,7 @@ func DeleteProperty(c *fiber.Ctx) error {
 // @Param id path string true "Property ID"
 // @Param tenantId path string true "Tenant ID"
 // @Success 200
-// @Router /property/tenant/{id}/{tenantId} [patch]
+// @Router /property/tenant/{id}/{tenantId} [put]
 func UpdatePropertyTenant(c *fiber.Ctx) error {
 	id := c.Params("id")
 	tenantId := c.Params("tenantId")
@@ -144,7 +144,7 @@ func UpdatePropertyTenant(c *fiber.Ctx) error {
 // @Param id path string true "Property ID"
 // @Param landlordId path string true "Landlord ID"
 // @Success 200
-// @Router /property/landlord/{id}/{landlordId} [patch]
+// @Router /property/landlord/{id}/{landlordId} [put]
 func UpdatePropertyLandlord(c *fiber.Ctx) error {
 	id := c.Params("id")
 	landlordId := c.Params("landlordId")

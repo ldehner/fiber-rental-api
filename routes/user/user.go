@@ -13,8 +13,8 @@ import (
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param user body User true "User"
-// @Success 201 {object} User
+// @Param user body requestmodels.User true "User"
+// @Success 201 {object} responsemodels.User
 // @Router /user/create [post]
 func CreateUser(c *fiber.Ctx) error {
 	var user requestmodels.User
@@ -35,7 +35,7 @@ func CreateUser(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Success 302 {object} User
+// @Success 302 {object} responsemodels.User
 // @Router /user/{id} [get]
 func GetUser(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -52,7 +52,7 @@ func GetUser(c *fiber.Ctx) error {
 // @Tags user
 // @Accept json
 // @Produce json
-// @Success 302 {object} []User
+// @Success 302 {object} []responsemodels.User
 // @Router /user [get]
 func GetUsers(c *fiber.Ctx) error {
 	users, err := conf.Conf{}.GetUserRepository().GetUsers()
@@ -72,9 +72,9 @@ func GetUsers(c *fiber.Ctx) error {
 // @Tags user
 // @Accept json
 // @Produce json
-// @Param user body User true "User"
-// @Success 200 {object} User
-// @Router /user/update [patch]
+// @Param user body requestmodels.User true "User"
+// @Success 200 {object} responsemodels.User
+// @Router /user/update [put]
 func UpdateUser(c *fiber.Ctx) error {
 	var user requestmodels.User
 	if err := c.BodyParser(&user); err != nil {
@@ -94,9 +94,9 @@ func UpdateUser(c *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
-// @Param contactInfo body ContactInfo true "Contact Info"
-// @Success 200 {object} User
-// @Router /user/contactinfo/{id} [patch]
+// @Param contactInfo body requestmodels.ContactInfo true "Contact Info"
+// @Success 200 {object} responsemodels.User
+// @Router /user/contactinfo/{id} [put]
 func UpdateContactInfo(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var contactInfo requestmodels.ContactInfo

@@ -1,6 +1,8 @@
 package propertyroutes
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/ldehner/fiber-rental-api/conf"
@@ -15,8 +17,8 @@ import (
 // @Tags Property
 // @Accept  json
 // @Produce  json
-// @Param invite body Invite true "Invite"
-// @Success 200 {object} Invite
+// @Param invite body requestmodels.Invite true "Invite"
+// @Success 200 {string} string "InviteId"
 // @Router /property/invite/{propertyId} [get]
 func CreateInvite(c *fiber.Ctx) error {
 	var invite requestmodels.Invite
@@ -24,7 +26,7 @@ func CreateInvite(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
 	invite.Property = c.Params("propertyId")
-	dbinvite, err := conf.Conf{}.GetPropertyRepository().CreatePropertyInvite(CreateStoreInvite(invite, uuid.New().String()))
+	dbinvite, err := conf.Conf{}.GetPropertyRepository().CreatePropertyInvite(CreateStoreInvite(invite, uuid.New().String(), time.Now().AddDate(0, 0, 7)))
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
@@ -39,7 +41,7 @@ func CreateInvite(c *fiber.Ctx) error {
 // @Produce  json
 // @Param id path string true "Invite ID"
 // @Param userId path string true "User ID"
-// @Success 200 {object} Invite
+// @Success 200 {object} responsemodels.Property
 // @Router /property/invite/{id}/{userId} [post]
 func AcceptInvite(c *fiber.Ctx) error {
 	id := c.Params("id")
@@ -48,6 +50,9 @@ func AcceptInvite(c *fiber.Ctx) error {
 	var prop responsemodels.Property
 	invite, err := conf.Conf{}.GetPropertyRepository().GetPropertyInvites(id)
 	if err != nil {
+		return c.Status(fiber.StatusConflict).SendString(err.Error())
+	}
+	if invite.ValidDue.Before(time.Now()) {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
 	if len(invite.Tenant) > 0 {

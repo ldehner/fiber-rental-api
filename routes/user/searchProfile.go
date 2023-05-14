@@ -9,7 +9,7 @@ import (
 // CreateSearchProfile godoc
 // @Summary Create a user's search profile
 // @Description Create a user's search profile
-// @Tags user
+// @Tags User Search Profile
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -32,7 +32,7 @@ func CreateSearchProfile(c *fiber.Ctx) error {
 // GetSearchProfile godoc
 // @Summary Get a user's search profile
 // @Description Get a user's search profile
-// @Tags user
+// @Tags User Search Profile
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -50,7 +50,7 @@ func GetSearchProfile(c *fiber.Ctx) error {
 // UpdateSearchProfile godoc
 // @Summary Update a user's search profile
 // @Description Update a user's search profile
-// @Tags user
+// @Tags User Search Profile
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -73,7 +73,7 @@ func UpdateSearchProfile(c *fiber.Ctx) error {
 // DeleteSearchProfile godoc
 // @Summary Delete a user's search profile
 // @Description Delete a user's search profile
-// @Tags user
+// @Tags User Search Profile
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"

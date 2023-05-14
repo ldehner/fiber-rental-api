@@ -59,7 +59,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Get all incidents",
                 "parameters": [
@@ -94,7 +94,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Get an incident",
                 "parameters": [
@@ -124,7 +124,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Update an incident",
                 "parameters": [
@@ -169,7 +169,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Delete an incident",
                 "parameters": [
@@ -207,7 +207,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Create a new incident",
                 "parameters": [
@@ -305,7 +305,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Property"
+                    "Property Invite"
                 ],
                 "summary": "Accept an invite",
                 "parameters": [
@@ -335,7 +335,7 @@ const docTemplate = `{
             }
         },
         "/property/invite/{propertyId}": {
-            "get": {
+            "put": {
                 "description": "Create an invite",
                 "consumes": [
                     "application/json"
@@ -344,7 +344,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Property"
+                    "Property Invite"
                 ],
                 "summary": "Create an invite",
                 "parameters": [
@@ -356,6 +356,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/requestmodels.Invite"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "propertyId",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -414,7 +421,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Get a market profile",
                 "parameters": [
@@ -444,7 +451,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Update a market profile",
                 "parameters": [
@@ -483,7 +490,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Create a new market profile",
                 "parameters": [
@@ -515,7 +522,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Delete a market profile",
                 "parameters": [
@@ -544,7 +551,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Get all market profiles",
                 "responses": {
@@ -568,6 +575,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Get a rent profile",
                 "operationId": "get-rent-profile",
@@ -596,6 +606,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Update a rent profile",
                 "operationId": "update-rent-profile",
@@ -634,6 +647,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Property Rent Profile"
+                ],
                 "summary": "Create a rent profile",
                 "operationId": "create-rent-profile",
                 "parameters": [
@@ -663,6 +679,9 @@ const docTemplate = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Delete a rent profile",
                 "operationId": "delete-rent-profile",
@@ -826,7 +845,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Get all users",
                 "responses": {
@@ -852,7 +871,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Update a user's contact info",
                 "parameters": [
@@ -893,7 +912,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Create a new user",
                 "parameters": [
@@ -927,7 +946,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Get a user's search profile",
                 "parameters": [
@@ -957,7 +976,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Update a user's search profile",
                 "parameters": [
@@ -996,7 +1015,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Create a user's search profile",
                 "parameters": [
@@ -1035,7 +1054,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Delete a user's search profile",
                 "parameters": [
@@ -1064,7 +1083,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Get a user's tenant info",
                 "parameters": [
@@ -1094,7 +1113,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Update a user's tenant info",
                 "parameters": [
@@ -1133,7 +1152,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Create a user's tenant info",
                 "parameters": [
@@ -1172,7 +1191,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Delete a user's tenant info",
                 "parameters": [
@@ -1201,7 +1220,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Update a user",
                 "parameters": [
@@ -1235,7 +1254,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Get a user",
                 "parameters": [
@@ -1265,7 +1284,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Delete a user",
                 "parameters": [

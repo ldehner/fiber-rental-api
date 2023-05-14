@@ -49,7 +49,7 @@ func setupPrivateRoutes(app *fiber.App) {
 	app.Get("/property/rentprofile/:id", propertyroutes.GetRentProfile)
 	app.Delete("/property/rentprofile/:id", propertyroutes.DeleteRentProfile)
 	app.Post("/property/invite/:id/:userId", propertyroutes.AcceptInvite)
-	app.Get("/property/invite/:propertyId", propertyroutes.CreateInvite)
+	app.Put("/property/invite/:propertyId", propertyroutes.CreateInvite)
 	app.Post("/property/incident:propertyId", propertyroutes.CreateIncident)
 	app.Put("/property/incident/:propertyId/:incidentId", propertyroutes.UpdateIncident)
 	app.Get("/property/incident/:propertyId/:incidentId", propertyroutes.GetIncident)

@@ -11,7 +11,7 @@ import (
 // CreateIncident godoc
 // @Summary Create a new incident
 // @Description Create a new incident
-// @Tags incidents
+// @Tags Property Incident
 // @Accept  json
 // @Produce  json
 // @Param incident body requestmodels.Incident true "Incident"
@@ -34,7 +34,7 @@ func CreateIncident(c *fiber.Ctx) error {
 // GetIncident godoc
 // @Summary Get an incident
 // @Description Get an incident
-// @Tags incidents
+// @Tags Property Incident
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Incident ID"
@@ -53,7 +53,7 @@ func GetIncident(c *fiber.Ctx) error {
 // GetIncidents godoc
 // @Summary Get all incidents
 // @Description Get all incidents
-// @Tags incidents
+// @Tags Property Incident
 // @Accept  json
 // @Produce  json
 // @Param propertyId path string true "Property ID"
@@ -75,7 +75,7 @@ func GetIncidents(c *fiber.Ctx) error {
 // UpdateIncident godoc
 // @Summary Update an incident
 // @Description Update an incident
-// @Tags incidents
+// @Tags Property Incident
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Incident ID"
@@ -100,7 +100,7 @@ func UpdateIncident(c *fiber.Ctx) error {
 // DeleteIncident godoc
 // @Summary Delete an incident
 // @Description Delete an incident
-// @Tags incidents
+// @Tags Property Incident
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Incident ID"

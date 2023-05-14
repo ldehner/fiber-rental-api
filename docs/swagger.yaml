@@ -352,7 +352,7 @@ paths:
             type: array
       summary: Get all incidents
       tags:
-      - incidents
+      - Property Incident
   /incident/{propertyId}/{incidentId}:
     delete:
       consumes:
@@ -377,7 +377,7 @@ paths:
             type: string
       summary: Delete an incident
       tags:
-      - incidents
+      - Property Incident
     get:
       consumes:
       - application/json
@@ -397,7 +397,7 @@ paths:
             $ref: '#/definitions/responsemodels.Incident'
       summary: Get an incident
       tags:
-      - incidents
+      - Property Incident
     put:
       consumes:
       - application/json
@@ -427,7 +427,7 @@ paths:
             type: string
       summary: Update an incident
       tags:
-      - incidents
+      - Property Incident
   /incidents/{propertyId}:
     post:
       consumes:
@@ -453,7 +453,7 @@ paths:
             type: string
       summary: Create a new incident
       tags:
-      - incidents
+      - Property Incident
   /property:
     get:
       consumes:
@@ -582,9 +582,9 @@ paths:
             $ref: '#/definitions/responsemodels.Property'
       summary: Accept an invite
       tags:
-      - Property
+      - Property Invite
   /property/invite/{propertyId}:
-    get:
+    put:
       consumes:
       - application/json
       description: Create an invite
@@ -595,6 +595,11 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/requestmodels.Invite'
+      - description: Property ID
+        in: path
+        name: propertyId
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -604,7 +609,7 @@ paths:
             type: string
       summary: Create an invite
       tags:
-      - Property
+      - Property Invite
   /property/landlord/{id}/{landlordId}:
     put:
       consumes:
@@ -647,7 +652,7 @@ paths:
           description: OK
       summary: Delete a market profile
       tags:
-      - MarketProfile
+      - Property Market Profile
     get:
       consumes:
       - application/json
@@ -667,7 +672,7 @@ paths:
             $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Get a market profile
       tags:
-      - MarketProfile
+      - Property Market Profile
     post:
       consumes:
       - application/json
@@ -688,7 +693,7 @@ paths:
             $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Create a new market profile
       tags:
-      - MarketProfile
+      - Property Market Profile
     put:
       consumes:
       - application/json
@@ -714,7 +719,7 @@ paths:
             $ref: '#/definitions/responsemodels.MarketProfile'
       summary: Update a market profile
       tags:
-      - MarketProfile
+      - Property Market Profile
   /property/marketprofiles:
     get:
       consumes:
@@ -731,7 +736,7 @@ paths:
             type: array
       summary: Get all market profiles
       tags:
-      - MarketProfile
+      - Property Market Profile
   /property/rentprofile/{id}:
     delete:
       consumes:
@@ -750,6 +755,8 @@ paths:
         "200":
           description: OK
       summary: Delete a rent profile
+      tags:
+      - Property Rent Profile
     get:
       consumes:
       - application/json
@@ -769,6 +776,8 @@ paths:
           schema:
             $ref: '#/definitions/responsemodels.RentProfile'
       summary: Get a rent profile
+      tags:
+      - Property Rent Profile
     post:
       consumes:
       - application/json
@@ -789,6 +798,8 @@ paths:
           schema:
             $ref: '#/definitions/responsemodels.RentProfile'
       summary: Create a rent profile
+      tags:
+      - Property Rent Profile
     put:
       consumes:
       - application/json
@@ -814,6 +825,8 @@ paths:
           schema:
             $ref: '#/definitions/responsemodels.RentProfile'
       summary: Update a rent profile
+      tags:
+      - Property Rent Profile
   /property/tenant/{id}/{tenantId}:
     put:
       consumes:
@@ -854,7 +867,7 @@ paths:
             type: array
       summary: Get all users
       tags:
-      - user
+      - User
   /user/{id}:
     delete:
       consumes:
@@ -873,7 +886,7 @@ paths:
           description: OK
       summary: Delete a user
       tags:
-      - user
+      - User
     get:
       consumes:
       - application/json
@@ -893,7 +906,7 @@ paths:
             $ref: '#/definitions/responsemodels.User'
       summary: Get a user
       tags:
-      - user
+      - User
   /user/contactinfo/{id}:
     put:
       consumes:
@@ -920,7 +933,7 @@ paths:
             $ref: '#/definitions/responsemodels.User'
       summary: Update a user's contact info
       tags:
-      - user
+      - User
   /user/create:
     post:
       consumes:
@@ -942,7 +955,7 @@ paths:
             $ref: '#/definitions/responsemodels.User'
       summary: Create a new user
       tags:
-      - user
+      - User
   /user/searchprofile/{id}:
     delete:
       consumes:
@@ -961,7 +974,7 @@ paths:
           description: OK
       summary: Delete a user's search profile
       tags:
-      - user
+      - User Search Profile
     get:
       consumes:
       - application/json
@@ -981,7 +994,7 @@ paths:
             $ref: '#/definitions/responsemodels.SearchProfile'
       summary: Get a user's search profile
       tags:
-      - user
+      - User Search Profile
     post:
       consumes:
       - application/json
@@ -1007,7 +1020,7 @@ paths:
             $ref: '#/definitions/responsemodels.SearchProfile'
       summary: Create a user's search profile
       tags:
-      - user
+      - User Search Profile
     put:
       consumes:
       - application/json
@@ -1033,7 +1046,7 @@ paths:
             $ref: '#/definitions/responsemodels.SearchProfile'
       summary: Update a user's search profile
       tags:
-      - user
+      - User Search Profile
   /user/tenantinfo/{id}:
     delete:
       consumes:
@@ -1052,7 +1065,7 @@ paths:
           description: OK
       summary: Delete a user's tenant info
       tags:
-      - user
+      - User Tenant Info
     get:
       consumes:
       - application/json
@@ -1072,7 +1085,7 @@ paths:
             $ref: '#/definitions/responsemodels.TenantInfo'
       summary: Get a user's tenant info
       tags:
-      - user
+      - User Tenant Info
     post:
       consumes:
       - application/json
@@ -1098,7 +1111,7 @@ paths:
             $ref: '#/definitions/responsemodels.TenantInfo'
       summary: Create a user's tenant info
       tags:
-      - user
+      - User Tenant Info
     put:
       consumes:
       - application/json
@@ -1124,7 +1137,7 @@ paths:
             $ref: '#/definitions/responsemodels.TenantInfo'
       summary: Update a user's tenant info
       tags:
-      - user
+      - User Tenant Info
   /user/update:
     put:
       consumes:
@@ -1146,7 +1159,7 @@ paths:
             $ref: '#/definitions/responsemodels.User'
       summary: Update a user
       tags:
-      - user
+      - User
 schemes:
 - http
 swagger: "2.0"

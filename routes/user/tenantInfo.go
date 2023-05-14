@@ -9,7 +9,7 @@ import (
 // GetTenantInfo godoc
 // @Summary Get a user's tenant info
 // @Description Get a user's tenant info
-// @Tags user
+// @Tags User Tenant Info
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -27,7 +27,7 @@ func GetTenantInfo(c *fiber.Ctx) error {
 // UpdateTenantInfo godoc
 // @Summary Update a user's tenant info
 // @Description Update a user's tenant info
-// @Tags user
+// @Tags User Tenant Info
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -50,7 +50,7 @@ func UpdateTenantInfo(c *fiber.Ctx) error {
 // CreateTenantInfo godoc
 // @Summary Create a user's tenant info
 // @Description Create a user's tenant info
-// @Tags user
+// @Tags User Tenant Info
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -73,7 +73,7 @@ func CreateTenantInfo(c *fiber.Ctx) error {
 // DeleteTenantInfo godoc
 // @Summary Delete a user's tenant info
 // @Description Delete a user's tenant info
-// @Tags user
+// @Tags User Tenant Info
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"

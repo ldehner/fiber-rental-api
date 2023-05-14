@@ -14,12 +14,13 @@ import (
 // CreateInvite godoc
 // @Summary Create an invite
 // @Description Create an invite
-// @Tags Property
+// @Tags Property Invite
 // @Accept  json
 // @Produce  json
 // @Param invite body requestmodels.Invite true "Invite"
+// @Param propertyId path string true "Property ID"
 // @Success 200 {string} string "InviteId"
-// @Router /property/invite/{propertyId} [get]
+// @Router /property/invite/{propertyId} [put]
 func CreateInvite(c *fiber.Ctx) error {
 	var invite requestmodels.Invite
 	if err := c.BodyParser(&invite); err != nil {
@@ -36,7 +37,7 @@ func CreateInvite(c *fiber.Ctx) error {
 // AcceptInvite godoc
 // @Summary Accept an invite
 // @Description Accept an invite
-// @Tags Property
+// @Tags Property Invite
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Invite ID"

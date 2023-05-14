@@ -9,6 +9,7 @@ import (
 // CreateRentProfile godoc
 // @Summary Create a rent profile
 // @Description Create a rent profile
+// @Tags Property Rent Profile
 // @ID create-rent-profile
 // @Accept  json
 // @Produce  json
@@ -31,6 +32,7 @@ func CreateRentProfile(c *fiber.Ctx) error {
 // GetRentProfile godoc
 // @Summary Get a rent profile
 // @Description Get a rent profile
+// @Tags Property Rent Profile
 // @ID get-rent-profile
 // @Accept  json
 // @Produce  json
@@ -49,6 +51,7 @@ func GetRentProfile(c *fiber.Ctx) error {
 // UpdateRentProfile godoc
 // @Summary Update a rent profile
 // @Description Update a rent profile
+// @Tags Property Rent Profile
 // @ID update-rent-profile
 // @Accept  json
 // @Produce  json
@@ -72,6 +75,7 @@ func UpdateRentProfile(c *fiber.Ctx) error {
 // DeleteRentProfile godoc
 // @Summary Delete a rent profile
 // @Description Delete a rent profile
+// @Tags Property Rent Profile
 // @ID delete-rent-profile
 // @Accept  json
 // @Produce  json

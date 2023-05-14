@@ -55,7 +55,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Get all incidents",
                 "parameters": [
@@ -90,7 +90,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Get an incident",
                 "parameters": [
@@ -120,7 +120,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Update an incident",
                 "parameters": [
@@ -165,7 +165,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Delete an incident",
                 "parameters": [
@@ -203,7 +203,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "incidents"
+                    "Property Incident"
                 ],
                 "summary": "Create a new incident",
                 "parameters": [
@@ -301,7 +301,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Property"
+                    "Property Invite"
                 ],
                 "summary": "Accept an invite",
                 "parameters": [
@@ -331,7 +331,7 @@
             }
         },
         "/property/invite/{propertyId}": {
-            "get": {
+            "put": {
                 "description": "Create an invite",
                 "consumes": [
                     "application/json"
@@ -340,7 +340,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Property"
+                    "Property Invite"
                 ],
                 "summary": "Create an invite",
                 "parameters": [
@@ -352,6 +352,13 @@
                         "schema": {
                             "$ref": "#/definitions/requestmodels.Invite"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Property ID",
+                        "name": "propertyId",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -410,7 +417,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Get a market profile",
                 "parameters": [
@@ -440,7 +447,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Update a market profile",
                 "parameters": [
@@ -479,7 +486,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Create a new market profile",
                 "parameters": [
@@ -511,7 +518,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Delete a market profile",
                 "parameters": [
@@ -540,7 +547,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "MarketProfile"
+                    "Property Market Profile"
                 ],
                 "summary": "Get all market profiles",
                 "responses": {
@@ -564,6 +571,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Get a rent profile",
                 "operationId": "get-rent-profile",
@@ -592,6 +602,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Update a rent profile",
                 "operationId": "update-rent-profile",
@@ -630,6 +643,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "Property Rent Profile"
+                ],
                 "summary": "Create a rent profile",
                 "operationId": "create-rent-profile",
                 "parameters": [
@@ -659,6 +675,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "Property Rent Profile"
                 ],
                 "summary": "Delete a rent profile",
                 "operationId": "delete-rent-profile",
@@ -822,7 +841,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Get all users",
                 "responses": {
@@ -848,7 +867,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Update a user's contact info",
                 "parameters": [
@@ -889,7 +908,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Create a new user",
                 "parameters": [
@@ -923,7 +942,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Get a user's search profile",
                 "parameters": [
@@ -953,7 +972,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Update a user's search profile",
                 "parameters": [
@@ -992,7 +1011,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Create a user's search profile",
                 "parameters": [
@@ -1031,7 +1050,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Search Profile"
                 ],
                 "summary": "Delete a user's search profile",
                 "parameters": [
@@ -1060,7 +1079,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Get a user's tenant info",
                 "parameters": [
@@ -1090,7 +1109,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Update a user's tenant info",
                 "parameters": [
@@ -1129,7 +1148,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Create a user's tenant info",
                 "parameters": [
@@ -1168,7 +1187,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Tenant Info"
                 ],
                 "summary": "Delete a user's tenant info",
                 "parameters": [
@@ -1197,7 +1216,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Update a user",
                 "parameters": [
@@ -1231,7 +1250,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Get a user",
                 "parameters": [
@@ -1261,7 +1280,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "Delete a user",
                 "parameters": [

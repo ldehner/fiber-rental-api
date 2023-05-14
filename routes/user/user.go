@@ -10,7 +10,7 @@ import (
 // CreateUser godoc
 // @Summary Create a new user
 // @Description Create a new user
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Param user body requestmodels.User true "User"
@@ -25,13 +25,14 @@ func CreateUser(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
+	dbuser.Id = user.Id
 	return c.Status(fiber.StatusCreated).JSON(CreateResponseUser(dbuser))
 }
 
 // GetUser godoc
 // @Summary Get a user
 // @Description Get a user
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -43,13 +44,14 @@ func GetUser(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusConflict).SendString(err.Error())
 	}
+	user.Id = id
 	return c.Status(fiber.StatusFound).JSON(CreateResponseUser(user))
 }
 
 // GetUsers godoc
 // @Summary Get all users
 // @Description Get all users
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Success 302 {object} []responsemodels.User
@@ -69,7 +71,7 @@ func GetUsers(c *fiber.Ctx) error {
 // UpdateUser godoc
 // @Summary Update a user
 // @Description Update a user
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Param user body requestmodels.User true "User"
@@ -90,7 +92,7 @@ func UpdateUser(c *fiber.Ctx) error {
 // UpdateContactInfo godoc
 // @Summary Update a user's contact info
 // @Description Update a user's contact info
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"
@@ -113,7 +115,7 @@ func UpdateContactInfo(c *fiber.Ctx) error {
 // DeleteUser godoc
 // @Summary Delete a user
 // @Description Delete a user
-// @Tags user
+// @Tags User
 // @Accept json
 // @Produce json
 // @Param id path string true "User ID"

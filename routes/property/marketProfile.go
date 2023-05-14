@@ -10,7 +10,7 @@ import (
 // CreateMarketProfile godoc
 // @Summary Create a new market profile
 // @Description Create a new market profile
-// @Tags MarketProfile
+// @Tags Property Market Profile
 // @Accept  json
 // @Produce  json
 // @Param marketProfile body requestmodels.MarketProfile true "Market Profile"
@@ -32,7 +32,7 @@ func CreateMarketProfile(c *fiber.Ctx) error {
 // GetMarketProfile godoc
 // @Summary Get a market profile
 // @Description Get a market profile
-// @Tags MarketProfile
+// @Tags Property Market Profile
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Market Profile ID"
@@ -50,7 +50,7 @@ func GetMarketProfile(c *fiber.Ctx) error {
 // UpdateMarketProfile godoc
 // @Summary Update a market profile
 // @Description Update a market profile
-// @Tags MarketProfile
+// @Tags Property Market Profile
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Market Profile ID"
@@ -73,7 +73,7 @@ func UpdateMarketProfile(c *fiber.Ctx) error {
 // DeleteMarketProfile godoc
 // @Summary Delete a market profile
 // @Description Delete a market profile
-// @Tags MarketProfile
+// @Tags Property Market Profile
 // @Accept  json
 // @Produce  json
 // @Param id path string true "Market Profile ID"
@@ -91,7 +91,7 @@ func DeleteMarketProfile(c *fiber.Ctx) error {
 // GetMarketProfiles godoc
 // @Summary Get all market profiles
 // @Description Get all market profiles
-// @Tags MarketProfile
+// @Tags Property Market Profile
 // @Accept  json
 // @Produce  json
 // @Success 302 {array} responsemodels.MarketProfile

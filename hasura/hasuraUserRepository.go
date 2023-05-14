@@ -1,9 +1,6 @@
 package hasura
 
 import (
-	"fmt"
-
-	"github.com/goccy/go-json"
 	storemodels "github.com/ldehner/fiber-rental-api/models/store"
 )
 
@@ -11,18 +8,21 @@ type HasuraUserRepository struct {
 }
 
 func (HasuraUserRepository) CreateUser(user storemodels.User) (storemodels.User, error) {
-	json, err := json.Marshal(user)
-	if err != nil {
-		return user, err
-	}
-	status, err := PostRequest(json, "/user")
-	if err != nil {
-		return user, err
-	}
-	if status != "200 OK" {
-		return user, fmt.Errorf("Error creating user: %s", status)
-	}
-	fmt.Println(status)
+	/*
+		json, err := json.Marshal(user)
+		if err != nil {
+			return user, err
+		}
+		status, err := PostRequest(json, "/user")
+		if err != nil {
+			return user, err
+		}
+		if status != "200 OK" {
+			return user, fmt.Errorf("Error creating user: %s", status)
+		}
+		fmt.Println(status)
+		return user, nil
+	*/
 	return user, nil
 }
 func (HasuraUserRepository) GetUser(id string) (storemodels.User, error) {

@@ -17,10 +17,10 @@ func setupPrivateRoutes(app *fiber.App) {
 	app.Get("/", HealthCheck)
 	app.Get("/swagger/*", swagger.HandlerDefault) // default
 	// user endpoints
-	app.Post("/user/create", userroutes.CreateUser)
+	app.Post("/user", userroutes.CreateUser)
 	app.Get("/user/:id", userroutes.GetUser)
 	app.Get("/user", userroutes.GetUsers)
-	app.Put("/user/update", userroutes.UpdateUser)
+	app.Put("/user", userroutes.UpdateUser)
 	app.Put("/user/contactinfo/:id", userroutes.UpdateContactInfo)
 	app.Delete("/user/:id", userroutes.DeleteUser)
 	app.Post("/user/tenantinfo/:id", userroutes.CreateTenantInfo)

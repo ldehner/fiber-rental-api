@@ -8,6 +8,9 @@ import (
 	responsemodels "github.com/ldehner/fiber-rental-api/models/response"
 )
 
+type IncidentRouting struct {
+}
+
 // CreateIncident godoc
 // @Summary Create a new incident
 // @Description Create a new incident

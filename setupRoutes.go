@@ -3,24 +3,24 @@ package main
 import (
 	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/gofiber/fiber/v2"
+	"github.com/ldehner/fiber-rental-api/middleware"
 	propertyroutes "github.com/ldehner/fiber-rental-api/routes/property"
 	userroutes "github.com/ldehner/fiber-rental-api/routes/user"
 )
 
 func setupPublicRoutes(app *fiber.App) {
-	// user endpoints
-
-	// property endpoints
+	app.Get("/", HealthCheck)
+	app.Get("/swagger/*", swagger.HandlerDefault) // default
+	app.Post("/user", userroutes.CreateUser)
 }
 
 func setupPrivateRoutes(app *fiber.App) {
-	app.Get("/", HealthCheck)
-	app.Get("/swagger/*", swagger.HandlerDefault) // default
+	app.Use(middleware.JwtMiddleware)
+
 	// user endpoints
-	app.Post("/user", userroutes.CreateUser)
 	app.Get("/user/:id", userroutes.GetUser)
 	app.Get("/user", userroutes.GetUsers)
-	app.Put("/user", userroutes.UpdateUser)
+	app.Put("/user/:id", userroutes.UpdateUser)
 	app.Put("/user/contactinfo/:id", userroutes.UpdateContactInfo)
 	app.Delete("/user/:id", userroutes.DeleteUser)
 	app.Post("/user/tenantinfo/:id", userroutes.CreateTenantInfo)
